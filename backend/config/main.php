@@ -11,7 +11,14 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+     'modules' => [
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module'
+        ],
+        'backup' => [
+            'class' => 'spanjeta\modules\backup\Module',
+        ], 
+    ],
     'components' => [
         'request' => [
              'class' => 'common\components\Request',
@@ -60,6 +67,8 @@ return [
                 'home' => 'site/index',
                 'passwords'      => 'site/passwords',
                 'user-profile'   => 'site/user-profile',
+                'update-profile' => 'site/update-profile',
+
                 'update-profile' => 'site/update-profile',
 
             ],
