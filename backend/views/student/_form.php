@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\date\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Student */
@@ -19,23 +20,27 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'std_father_name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'std_gender')->dropDownList([ 'Male' => 'Male', 'Female' => 'Female', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'std_dob')->textInput() ?>
-
+    <?= $form->field($model, 'std_gender')->dropDownList([ 'Male' => 'Male', 'Female' => 'Female', ], ['prompt' => 'Select gender ...']) ?>
+    <?php  
+    echo '<label>Date of Birth</label>';
+    echo DatePicker::widget([
+    'model' => $model, 
+    'attribute' => 'std_dob',
+    'options' => ['placeholder' => 'Select date ...'],
+    'convertFormat' => false,
+    'pluginOptions' => [        
+        'format' => 'yy-m-d',
+        'autoclose'=>true,
+        'todayHighlight' => true
+    ]
+    ]);
+    ?>
+    <br>
     <?= $form->field($model, 'std_address')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'std_mobile_no')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'std_mobile_no')->widget(yii\widgets\MaskedInput::class, [ 'mask' => '+99-999-9999999', ]) ?>
 
-    <?= $form->field($model, 'status')->dropDownList([ 'Active' => 'Active', 'Inactive' => 'Inactive', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'created_by')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_by')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+    <?= $form->field($model, 'status')->dropDownList([ 'Active' => 'Active', 'Inactive' => 'Inactive', ], ['prompt' => 'Select Status ...']) ?>
 
   
 	<?php if (!Yii::$app->request->isAjax){ ?>

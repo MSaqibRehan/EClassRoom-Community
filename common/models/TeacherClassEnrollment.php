@@ -1,5 +1,5 @@
 <?php
-
+ 
 namespace common\models;
 
 use Yii;
@@ -36,9 +36,9 @@ class TeacherClassEnrollment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['teacher_id', 'session_id', 'semester_id', 'created_by', 'created_at'], 'required'],
+            [['teacher_id', 'session_id', 'semester_id'], 'required'],
             [['teacher_id', 'session_id', 'semester_id', 'created_by', 'updated_by'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['updated_by', 'updated_at', 'created_by', 'created_at'], 'safe'],
             [['teacher_id'], 'exist', 'skipOnError' => true, 'targetClass' => Teacher::className(), 'targetAttribute' => ['teacher_id' => 'teacher_id']],
             [['semester_id'], 'exist', 'skipOnError' => true, 'targetClass' => Semester::className(), 'targetAttribute' => ['semester_id' => 'semester_id']],
             [['session_id'], 'exist', 'skipOnError' => true, 'targetClass' => Session::className(), 'targetAttribute' => ['session_id' => 'session_id']],
@@ -52,9 +52,9 @@ class TeacherClassEnrollment extends \yii\db\ActiveRecord
     {
         return [
             'tce_id' => 'Tce ID',
-            'teacher_id' => 'Teacher ID',
-            'session_id' => 'Session ID',
-            'semester_id' => 'Semester ID',
+            'teacher_id' => 'Teacher Name',
+            'session_id' => 'Session Duration',
+            'semester_id' => 'Semester No',
             'created_by' => 'Created By',
             'created_at' => 'Created At',
             'updated_by' => 'Updated By',

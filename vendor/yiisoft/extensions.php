@@ -157,4 +157,13 @@ return array (
     ),
     'bootstrap' => 'johnitvn\\ajaxcrud\\Bootstrap',
   ),
+  'kartik-v/yii2-widget-datepicker' => 
+  array (
+    'name' => 'kartik-v/yii2-widget-datepicker',
+    'version' => '1.4.7.0',
+    'alias' => 
+    array (
+      '@kartik/date' => $vendorDir . '/kartik-v/yii2-widget-datepicker/src',
+    ),
+  ),
 );

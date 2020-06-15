@@ -55,16 +55,24 @@ class StdEnrollmentSearch extends StdEnrollment
             return $dataProvider;
         }
 
+        $query->joinWith('std');
+        $query->joinWith('semester');
+        $query->joinWith('session');
+
         $query->andFilterWhere([
             'std_enrol_id' => $this->std_enrol_id,
-            'std_id' => $this->std_id,
-            'session_id' => $this->session_id,
-            'semester_id' => $this->semester_id,
+            //'std_id' => $this->std_id,
+            //'session_id' => $this->session_id,
+            //'semester_id' => $this->semester_id,
             'created_by' => $this->created_by,
             'created_at' => $this->created_at,
             'updated_by' => $this->updated_by,
             'updated_at' => $this->updated_at,
         ]);
+
+        $query->andFilterWhere(['like', 'std.std_name', $this->std_id])
+              ->andFilterWhere(['like', 'semester.semester_no', $this->semester_id])
+              ->andFilterWhere(['like', 'session.session_duration', $this->session_id]);
 
         return $dataProvider;
     }

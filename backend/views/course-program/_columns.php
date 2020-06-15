@@ -10,10 +10,10 @@ return [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
     ],
-        [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'cp_id',
-    ],
+    //     [
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'attribute'=>'cp_id',
+    // ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'cp_name',
@@ -26,10 +26,10 @@ return [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'status',
     ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'created_by',
-    ],
+    // [
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'attribute'=>'created_by',
+    // ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'created_at',

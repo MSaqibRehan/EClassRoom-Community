@@ -41,11 +41,11 @@ class SemesterSubjects extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['subj_1_title', 'subj_1_description', 'subj_2_title', 'subj_2_description', 'subj_3_title', 'subj_3_description', 'created_by', 'created_at'], 'required'],
+            [['subj_1_title', 'subj_1_description', 'subj_2_title', 'subj_2_description', 'subj_3_title', 'subj_3_description'], 'required'],
             [['created_by', 'updated_by'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
             [['subj_1_title', 'subj_2_title', 'subj_3_title', 'subj_4_title', 'subj_5_title', 'subj_6_title'], 'string', 'max' => 100],
             [['subj_1_description', 'subj_2_description', 'subj_3_description', 'subj_4_description', 'subj_5_description', 'subj_6_description'], 'string', 'max' => 255],
+            [['updated_by', 'updated_at', 'created_by', 'created_at'], 'safe'],
         ];
     }
 

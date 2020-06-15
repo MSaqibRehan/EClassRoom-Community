@@ -30,32 +30,37 @@
             [
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
-                    ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
-                    ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
-                    ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
+                    // ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
+                    ['label' => 'Dashboard', 'icon' => 'dashboard', 'url' => ['/home']],
+                    ['label' => 'Student', 'icon' => 'address-card-o', 'url' => ['/student']],                   
+                    ['label' => 'Student Enrollment', 'icon' => 'file-text-o', 'url' => ['/std-enrollment']],
+                    ['label' => 'Teacher', 'icon' => 'user', 'url' => ['/teacher']],
+                    ['label' => 'Teacher Class Enrollment', 'icon' => 'file-text', 'url' => ['/teacher-class-enrollment']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
-                        'label' => 'Some tools',
-                        'icon' => 'share',
+                        'label' => 'System Settings',
+                        'icon' => 'cogs',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii'],],
-                            ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug'],],
+                            ['label' => 'Course Program', 'icon' => 'tasks', 'url' => ['/course-program'],],
+                            ['label' => 'Session', 'icon' => 'calendar', 'url' => ['/session'],],
+                            //['label' => 'Semester', 'icon' => 'braille', 'url' => ['/semester'],],
                             [
-                                'label' => 'Level One',
-                                'icon' => 'circle-o',
+                                'label' => 'Semester',
+                                'icon' => 'braille',
                                 'url' => '#',
                                 'items' => [
-                                    ['label' => 'Level Two', 'icon' => 'circle-o', 'url' => '#',],
-                                    [
-                                        'label' => 'Level Two',
-                                        'icon' => 'circle-o',
-                                        'url' => '#',
-                                        'items' => [
-                                            ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
-                                            ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
-                                        ],
-                                    ],
+                                    ['label' => 'Semester No#', 'icon' => 'circle-o', 'url' => ['/semester'],],
+                                    ['label' => 'Semester Subjects', 'icon' => 'list-alt', 'url' => ['/semester-subjects'],],
+                                    // [
+                                    //     'label' => 'Level Two',
+                                    //     'icon' => 'circle-o',
+                                    //     'url' => '#',
+                                    //     'items' => [
+                                    //         ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
+                                    //         ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
+                                    //     ],
+                                    //  ],
                                 ],
                             ],
                         ],

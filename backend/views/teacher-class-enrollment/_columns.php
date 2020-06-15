@@ -10,26 +10,29 @@ return [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
     ],
-        [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'tce_id',
-    ],
-    [
+    //     [
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'attribute'=>'tce_id',
+    // ],
+    [ 
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'teacher_id',
+        'value'=>'teacher.teacher_name',
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'session_id',
+        'value'=>'session.session_duration',
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'semester_id',
+        'value'=>'semester.semester_no',
     ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'created_by',
-    ],
+    // [
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'attribute'=>'created_by',
+    // ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'created_at',

@@ -36,8 +36,8 @@ class Session extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['session_duration', 'session_start_date', 'session_end_date', 'status', 'created_by', 'created_at'], 'required'],
-            [['session_start_date', 'session_end_date', 'created_at', 'updated_at'], 'safe'],
+            [['session_duration', 'session_start_date', 'session_end_date', 'status'], 'required'],
+            [['session_start_date', 'session_end_date', 'updated_by', 'updated_at', 'created_by', 'created_at'], 'safe'],
             [['status'], 'string'],
             [['created_by', 'updated_by'], 'integer'],
             [['session_duration'], 'string', 'max' => 20],

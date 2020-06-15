@@ -34,15 +34,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'subj_6_title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'subj_6_description')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'created_by')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_by')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
   
 	<?php if (!Yii::$app->request->isAjax){ ?>
 	  	<div class="form-group">

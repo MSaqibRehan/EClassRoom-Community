@@ -34,10 +34,10 @@ class CourseProgram extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cp_name', 'no_of_semesters', 'status', 'created_by', 'created_at'], 'required'],
+            [['cp_name', 'no_of_semesters', 'status'], 'required'],
             [['no_of_semesters', 'created_by', 'updated_by'], 'integer'],
             [['status'], 'string'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at', 'created_by', 'updated_by'], 'safe'],
             [['cp_name'], 'string', 'max' => 200],
         ];
     }
@@ -49,7 +49,7 @@ class CourseProgram extends \yii\db\ActiveRecord
     {
         return [
             'cp_id' => 'Cp ID',
-            'cp_name' => 'Cp Name',
+            'cp_name' => 'Course Program Name',
             'no_of_semesters' => 'No Of Semesters',
             'status' => 'Status',
             'created_by' => 'Created By',

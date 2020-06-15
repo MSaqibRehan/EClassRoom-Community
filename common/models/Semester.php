@@ -35,9 +35,9 @@ class Semester extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['course_p_id', 'semester_no', 'created_by', 'created_at'], 'required'],
+            [['course_p_id', 'semester_no'], 'required'],
             [['course_p_id', 'created_by', 'updated_by'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at', 'created_by', 'updated_by'], 'safe'],
             [['semester_no'], 'string', 'max' => 50],
             [['course_p_id'], 'exist', 'skipOnError' => true, 'targetClass' => CourseProgram::className(), 'targetAttribute' => ['course_p_id' => 'cp_id']],
         ];
@@ -50,7 +50,7 @@ class Semester extends \yii\db\ActiveRecord
     {
         return [
             'semester_id' => 'Semester ID',
-            'course_p_id' => 'Course P ID',
+            'course_p_id' => 'Course Program Name',
             'semester_no' => 'Semester No',
             'created_by' => 'Created By',
             'created_at' => 'Created At',
