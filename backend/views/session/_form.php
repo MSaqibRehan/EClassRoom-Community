@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\date\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Session */
@@ -13,19 +14,37 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'session_duration')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'session_start_date')->textInput() ?>
+    <?php  
+    echo '<label>Session Start Date</label>';
+    echo DatePicker::widget([
+    'model' => $model, 
+    'attribute' => 'session_start_date',
+    'options' => ['placeholder' => 'Select start date ...'],
+    'convertFormat' => false,
+    'pluginOptions' => [        
+        'format' => 'yyyy-m-d',
+        'autoclose'=>true,
+        'todayHighlight' => true
+    ]
+    ]);
+    ?>
 
-    <?= $form->field($model, 'session_end_date')->textInput() ?>
+    <?php  
+    echo '<label>Session End Date</label>';
+    echo DatePicker::widget([
+    'model' => $model, 
+    'attribute' => 'session_end_date',
+    'options' => ['placeholder' => 'Select end date ...'],
+    'convertFormat' => false,
+    'pluginOptions' => [        
+        'format' => 'yy-m-d',
+        'autoclose'=>true,
+        'todayHighlight' => true
+    ]
+    ]);
+    ?>
 
     <?= $form->field($model, 'status')->dropDownList([ 'Active' => 'Active', 'Inactive' => 'Inactive', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'created_by')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_by')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
 
   
 	<?php if (!Yii::$app->request->isAjax){ ?>

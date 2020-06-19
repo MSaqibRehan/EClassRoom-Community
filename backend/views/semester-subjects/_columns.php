@@ -10,54 +10,54 @@ return [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
     ],
-        [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'sem_subj_id',
-    ],
+    //     [
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'attribute'=>'sem_subj_id',
+    // ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'subj_1_title',
     ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'subj_1_description',
-    ],
+    // [
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'attribute'=>'subj_1_description',
+    // ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'subj_2_title',
     ],
+    // [
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'attribute'=>'subj_2_description',
+    // ],
     [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'subj_2_description',
+        'attribute'=>'subj_3_title',
     ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'subj_3_title',
-    // ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'subj_3_description',
     // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'subj_4_title',
-    // ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'subj_4_title',
+    ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'subj_4_description',
     // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'subj_5_title',
-    // ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'subj_5_title',
+    ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'subj_5_description',
     // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'subj_6_title',
-    // ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'subj_6_title',
+    ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'subj_6_description',

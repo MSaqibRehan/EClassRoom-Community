@@ -18,7 +18,7 @@ use Yii;
  *
  * @property Student $std
  * @property Semester $semester
- * @property Session $session
+ * @property Session $session 
  */
 class StdEnrollment extends \yii\db\ActiveRecord
 {
@@ -36,9 +36,9 @@ class StdEnrollment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['std_id', 'session_id', 'semester_id', 'created_by', 'created_at'], 'required'],
+            [['std_id', 'session_id', 'semester_id'], 'required'],
             [['std_id', 'session_id', 'semester_id', 'created_by', 'updated_by'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['updated_by', 'updated_at', 'created_by', 'created_at'], 'safe'],
             [['std_id'], 'exist', 'skipOnError' => true, 'targetClass' => Student::className(), 'targetAttribute' => ['std_id' => 'std_id']],
             [['semester_id'], 'exist', 'skipOnError' => true, 'targetClass' => Semester::className(), 'targetAttribute' => ['semester_id' => 'semester_id']],
             [['session_id'], 'exist', 'skipOnError' => true, 'targetClass' => Session::className(), 'targetAttribute' => ['session_id' => 'session_id']],
@@ -52,9 +52,9 @@ class StdEnrollment extends \yii\db\ActiveRecord
     {
         return [
             'std_enrol_id' => 'Std Enrol ID',
-            'std_id' => 'Std ID',
-            'session_id' => 'Session ID',
-            'semester_id' => 'Semester ID',
+            'std_id' => 'Student Name',
+            'session_id' => 'Session Duration',
+            'semester_id' => 'Semester No',
             'created_by' => 'Created By',
             'created_at' => 'Created At',
             'updated_by' => 'Updated By',

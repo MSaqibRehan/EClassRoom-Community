@@ -55,16 +55,19 @@ class SemesterSearch extends Semester
             return $dataProvider;
         }
 
+        $query->joinWith('courseP');
+
         $query->andFilterWhere([
             'semester_id' => $this->semester_id,
-            'course_p_id' => $this->course_p_id,
+            //'course_p_id' => $this->course_p_id,
             'created_by' => $this->created_by,
             'created_at' => $this->created_at,
             'updated_by' => $this->updated_by,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'semester_no', $this->semester_no]);
+        $query->andFilterWhere(['like', 'semester_no', $this->semester_no])
+              ->andFilterWhere(['like', 'course_program.cp_name', $this->course_p_id]);;
 
         return $dataProvider;
     }

@@ -10,10 +10,10 @@ return [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
     ],
-        [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'teacher_id',
-    ],
+    //     [
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'attribute'=>'teacher_id',
+    // ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'user_id',
@@ -30,10 +30,10 @@ return [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'teacher_mobile_no',
     ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'teacher_gender',
-    // ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'teacher_gender',
+    ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'teacher_dob',
@@ -42,10 +42,10 @@ return [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'teacher_address',
     // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'status',
-    // ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'status',
+    ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'created_by',

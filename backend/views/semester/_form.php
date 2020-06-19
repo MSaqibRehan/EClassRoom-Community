@@ -1,6 +1,9 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use common\models\CourseProgram;
+use yii\helpers\ArrayHelper;
+
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Semester */
@@ -11,17 +14,12 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'course_p_id')->textInput() ?>
+    <?= $form->field($model, 'course_p_id')->dropDownList(
+                ArrayHelper::map(CourseProgram::find()->all(),'cp_id','cp_name'),
+                ['prompt'=>'Select Course Program ...',]
+    )?>
 
     <?= $form->field($model, 'semester_no')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'created_by')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_by')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
 
   
 	<?php if (!Yii::$app->request->isAjax){ ?>

@@ -40,10 +40,10 @@ class Teacher extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'teacher_name', 'teacher_father', 'teacher_mobile_no', 'teacher_gender', 'teacher_dob', 'teacher_address', 'status', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'required'],
+            [['user_id', 'teacher_name', 'teacher_father', 'teacher_mobile_no', 'teacher_gender', 'teacher_dob', 'teacher_address', 'status'], 'required'],
             [['user_id', 'created_by', 'updated_by'], 'integer'],
             [['teacher_gender', 'teacher_address', 'status'], 'string'],
-            [['teacher_dob', 'created_at', 'updated_at'], 'safe'],
+            [['teacher_dob', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'safe'],
             [['teacher_name', 'teacher_father'], 'string', 'max' => 255],
             [['teacher_mobile_no'], 'string', 'max' => 15],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],

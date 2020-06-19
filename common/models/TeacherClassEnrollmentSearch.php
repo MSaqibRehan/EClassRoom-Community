@@ -55,16 +55,24 @@ class TeacherClassEnrollmentSearch extends TeacherClassEnrollment
             return $dataProvider;
         }
 
+        $query->joinWith('teacher');
+        $query->joinWith('semester');
+        $query->joinWith('session');
+
         $query->andFilterWhere([
             'tce_id' => $this->tce_id,
-            'teacher_id' => $this->teacher_id,
-            'session_id' => $this->session_id,
-            'semester_id' => $this->semester_id,
+            //'teacher_id' => $this->teacher_id,
+            //'session_id' => $this->session_id,
+            //'semester_id' => $this->semester_id,
             'created_by' => $this->created_by,
             'created_at' => $this->created_at,
             'updated_by' => $this->updated_by,
             'updated_at' => $this->updated_at,
         ]);
+
+        $query->andFilterWhere(['like', 'teacher.teacher_name', $this->teacher_id])
+              ->andFilterWhere(['like', 'semester.semester_no', $this->semester_id])
+              ->andFilterWhere(['like', 'session.session_duration', $this->session_id]);
 
         return $dataProvider;
     }
