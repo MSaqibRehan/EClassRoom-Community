@@ -17,14 +17,3 @@ RewriteCond %{REQUEST_URI} ^/eclass/(admin)
 RewriteRule ^.*$ backend/web/index.php [L]
 
 RewriteCond %{REQUEST_URI} ^/eclass/(assets|css|images|uploads|userphotos)
-RewriteRule ^assets/(.*)$ frontend/web/assets/$1 [L]
-RewriteRule ^css/(.*)$ frontend/web/css/$1 [L]
-RewriteRule ^uploads/(.*)$ frontend/web/uploads/$1 [L] 
-RewriteRule ^images/(.*)$ frontend/web/images/$1 [L]
-RewriteRule ^userphotos/(.*)$ frontend/web/userphotos/$1 [L]
-
-RewriteCond %{REQUEST_URI} !^/eclass/(frontend|backend)/web/(assets|attachments|css|js|plugins|images|uploads|userphotos)/
-RewriteCond %{REQUEST_URI} !index.php
-RewriteCond %{REQUEST_FILENAME} !-f [OR]
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^.*$ frontend/web/index.php
