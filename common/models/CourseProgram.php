@@ -11,12 +11,16 @@ use Yii;
  * @property string $cp_name
  * @property int $no_of_semesters
  * @property string $status
- * @property int $created_by
- * @property string $created_at
+ * @property int|null $created_by
+ * @property string|null $created_at
  * @property int|null $updated_by
  * @property string|null $updated_at
  *
+ * @property Announcement[] $announcements
+ * @property Inbox[] $inboxes
+ * @property Quizz[] $quizzs
  * @property Semester[] $semesters
+ * @property SemesterSubjects[] $semesterSubjects
  */
 class CourseProgram extends \yii\db\ActiveRecord
 {
@@ -60,6 +64,36 @@ class CourseProgram extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[Announcements]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAnnouncements()
+    {
+        return $this->hasMany(Announcement::className(), ['course_p_id' => 'cp_id']);
+    }
+
+    /**
+     * Gets query for [[Inboxes]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInboxes()
+    {
+        return $this->hasMany(Inbox::className(), ['course_p_id' => 'cp_id']);
+    }
+
+    /**
+     * Gets query for [[Quizzs]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getQuizzs()
+    {
+        return $this->hasMany(Quizz::className(), ['course_p_id' => 'cp_id']);
+    }
+
+    /**
      * Gets query for [[Semesters]].
      *
      * @return \yii\db\ActiveQuery
@@ -67,5 +101,15 @@ class CourseProgram extends \yii\db\ActiveRecord
     public function getSemesters()
     {
         return $this->hasMany(Semester::className(), ['course_p_id' => 'cp_id']);
+    }
+
+    /**
+     * Gets query for [[SemesterSubjects]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSemesterSubjects()
+    {
+        return $this->hasMany(SemesterSubjects::className(), ['course_p_id' => 'cp_id']);
     }
 }

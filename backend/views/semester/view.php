@@ -4,6 +4,12 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Semester */
+
+$this->title = $model->semester_id; 
+$this->params['breadcrumbs'][] = ['label' => 'Semesters', 'url' => ['index']]; 
+$this->params['breadcrumbs'][] = $this->title; 
+\yii\web\YiiAsset::register($this); 
+
 ?>
 <div class="semester-view">
  <?php
