@@ -3,7 +3,7 @@
 $username = 'root';
 $password = '';
 $host = 'localhost';
-$db = 'blog';
+$db = 'eclass';
 
 $conn = mysqli_connect($host , $username , $password , $db);
 if(!$conn){

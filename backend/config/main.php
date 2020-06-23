@@ -69,8 +69,6 @@ return [
                 'user-profile'   => 'site/user-profile',
                 'update-profile' => 'site/update-profile',
 
-                'update-profile' => 'site/update-profile',
-
             ],
         ],
         

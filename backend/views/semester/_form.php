@@ -21,6 +21,8 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'semester_no')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'class_time')->dropDownList([ 'Morning' => 'Morning', 'Evening' => 'Evening', ], ['prompt' => '']) ?>
+
   
 	<?php if (!Yii::$app->request->isAjax){ ?>
 	  	<div class="form-group">
