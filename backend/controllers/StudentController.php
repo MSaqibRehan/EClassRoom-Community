@@ -4,9 +4,11 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Student;
-use common\models\User;
+
+use frontend\models\SignupForm;
 use common\models\StdEnrollment;
 use common\models\StudentSearch;
+use common\models\User;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -85,58 +87,40 @@ class StudentController extends Controller
     {
         $request = Yii::$app->request;
         $model = new Student(); 
-        $umodel = new User();  
+        $umodel = new SignupForm(); 
+        $enmodel = new StdEnrollment();  
 
-        if($request->isAjax){
-            /*
-            *   Process for ajax request
-            */
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            if($request->isGet){
-                return [
-                    'title'=> "Create new Student",
-                    'content'=>$this->renderAjax('create', [
-                        'model' => $model,
-                        'umodel' => $umodel,
-                        'enmodel' => $enmodel,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
-             }else if($model->load($request->post()) && $model->validate()){
-                $model->created_by = Yii::$app->user->identity->id; 
-                $model->created_at = new \yii\db\Expression('NOW()');
-                $model->updated_by = '0';
-                $model->updated_at = '0'; 
-                $model->save();
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new Student",
-                    'content'=>'<span class="text-success">Create Student success</span>',
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
-        
-                ];         
-            }else{           
-                return [
-                    'title'=> "Create new Student",
-                    'content'=>$this->renderAjax('create', [
-                        'model' => $model,
-                        'umodel' => $umodel,
-                        'enmodel' => $enmodel,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
-            }
-        }else{
             /*
             *   Process for non-ajax request
             */
-            if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->std_id]);
+            if ($model->load($request->post()) && $umodel->load($request->post()) && $enmodel->load($request->post())  ) {
+                
+
+                if ($umodel->signup()) {
+                    $uid=User::find()->orderBy(['id'=>SORT_DESC])->one();
+                    $model->user_id=$uid->id;
+                
+                }else{
+
+                    var_dump($umodel->getErrors());
+                    die;
+                }
+
+
+                $model->created_by = Yii::$app->user->identity->id; 
+                $model->created_at = new \yii\db\Expression('NOW()');
+                $model->status = 'Active';
+                if ($model->save()) {
+                    $enmodel->std_id=$model->std_id;
+                }else{
+                    echo $model->getErrors();
+                    die;
+                }
+                $enmodel->created_by = Yii::$app->user->identity->id; 
+                $enmodel->created_at = new \yii\db\Expression('NOW()');
+                $enmodel->save();
+                Yii::$app->session->setFlash('success', 'Thank you for registration. ');
+                return $this->redirect('./student');
             } else {
                 return $this->render('create', [
                     'model' => $model,
@@ -144,7 +128,7 @@ class StudentController extends Controller
                     'enmodel' => $enmodel,
                 ]);
             }
-        }
+        
        
     }
 

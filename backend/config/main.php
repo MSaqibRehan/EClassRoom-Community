@@ -68,7 +68,9 @@ return [
                 'passwords'      => 'site/passwords',
                 'user-profile'   => 'site/user-profile',
                 'update-profile' => 'site/update-profile',
-
+                //studnet
+                'student' => 'student/index',
+                'create-student' => 'student/create',
             ],
         ],
         

@@ -34,6 +34,7 @@ class Student extends \yii\db\ActiveRecord
     {
         return 'student';
     }
+   
 
     /**
      * {@inheritdoc}
@@ -41,7 +42,7 @@ class Student extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'std_reg_no', 'std_name', 'std_father_name', 'std_gender', 'std_dob', 'std_address', 'std_mobile_no', 'status'], 'required'],
+            [['user_id', 'std_reg_no', 'std_name', 'std_father_name', 'std_gender', 'std_dob', 'std_address', 'std_mobile_no', 'status' ], 'required'],
             [['user_id', 'created_by', 'updated_by'], 'integer'],
             [['std_gender', 'std_address', 'status'], 'string'],
             [['std_dob', 'updated_by', 'updated_at', 'created_by', 'created_at'], 'safe'],
