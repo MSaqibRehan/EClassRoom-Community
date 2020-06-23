@@ -57,20 +57,20 @@
 
 
 <div class="row w-100 mt-5 bg-light p-3 ml-1 border-secondary">
-  <h4 class=" text-warning w-100">Answers:</h4><br>
+  <h4 class=" text-info w-100">Answers:</h4><br>
    <?php
       $query = "SELECT * FROM comment WHERE status = 1 AND post_id= $post_id ORDER BY id DESC ";
       $record = mysqli_query($conn , $query);
       $comment_count = mysqli_num_rows($record);
       if ($comment_count == 0 ) {
-        echo "<p class=' text-warning text-center'>No comments on this post</p>";
+        echo "<p class=' text-info text-center'>No comments on this post</p>";
       }else{
           while ($record_set = mysqli_fetch_assoc($record)) {
           ?>
         <div class="row w-100 my-2">
           <div class="col-12  ">
-            <p class="h2 mb-0">Answer By : <?php echo $record_set['username']; ?></p>
-            <p class="text-secondary mb-0" style="font-size: 12px;"> <?php echo $record_set['date']; ?></p>
+            <p class="h3 mb-0 py-2 bg-info text-white">Answer By : <?php echo $record_set['username']; ?></p>
+            <p class="text-secondary mb-0" style="font-size: 15px;"> <?php echo $record_set['date']; ?></p>
             <p style="font-size: 22px; text-indent: 50px;"> <?php echo $record_set['comment']; ?></p>
           </div>
         </div>
@@ -81,18 +81,18 @@
  <div class="row w-100 mt-5 bg-light p-3 ml-1 border-secondary">
   <div class="col-12">
     <form action="" method="post" class="w-100 mt-3" >
-      <p class="h5 text-warning">Share Your Thoughts With us</p>
+      <p class="h5 text-success">Share Your Thoughts With us</p>
         <div class="form-group">
-          <label for="name" class="text-warning">Name: </label>
+          <label for="name" class="text-success">Name: </label>
           <input type="text" name="name" class="form-control" placeholder="Enter Your name" id="name" />
         </div>
         <div class="form-group">
-          <label for="email" class="text-warning">Email: </label>
+          <label for="email" class="text-success">Email: </label>
           <input type="email" name="email" class="form-control" placeholder="Enter Your Email" id="email" />
         </div>
         <div class="form-group">
-          <label for="comment" class="text-warning">Comment: </label>
-          <textarea id="comment" name="comment" placeholder="Enter Comment" class="form-control" rows="4"></textarea>
+          <label for="comment" class="text-success">Answer: </label>
+          <textarea id="comment" name="comment" placeholder="Enter Your Answer" class="form-control" rows="4"></textarea>
 
         </div>
 
@@ -108,49 +108,110 @@
 </div>
 </div>
   </div>
-  <div class="col-md-2 justify-content-start my-5">
+   <div class="col-md-2 justify-content-start my-5">
+    <div class="row my-2">
+ 
+      <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-block font-weight-bold btn-lg" data-toggle="modal" data-target="#exampleModal">
+  Add New Forum
+</button>
+
+<!-- Modal -->
+<div class="modal  fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add New Forum</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST" >
+          <div class="form-group">
+            <label class="form-control-label">Your Name</label> 
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Your Name"> 
+            
+          </div>
+      <span class="errname"></span>
+          <div class="form-group">
+            <label class="form-control-label">Your Email</label> 
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email Address"> 
+            <span class="erremail"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label">Your Question</label> 
+            <input type="text" class="form-control" id="question" name="question"> 
+            <span class="errquestion"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label">Category</label> 
+            <input type="text" class="form-control" id="category" name="category"> 
+            <span class="errcategory"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label">Description</label> 
+            <textarea name="description" id="description" rows="4" class="form-control" placeholder="Please Describe Your Question"></textarea>
+            <span class="errdescription"></span>
+          </div>
+          <span class="message_box"></span>
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="createforum">Save Forum</button>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
     
+    
+    <div class="row">
+      <?php
+        $post = mysqli_query($conn, "SELECT * FROM posts ORDER BY id DESC LIMIT 10");
+      ?>
+      <div class="card border-info w-100">
+        <div class="card-header bg-info text-white">
+          <p class="h3">Rescent Forums</p>
+        </div>
+        <div class="card-body ">
+          <?php
+            while ($row = mysqli_fetch_assoc($post)) {
+              $answer = mysqli_query($conn, "SELECT * FROM comment WHERE status = '1' and post_id = '".$row['id']."'");
+              $num_rows = mysqli_num_rows($answer);
+            
+
+                ?>
+                <div class="row my-2">
+                
+                <div class="col-12 p-0">
+                  <a href="fullpost.php?post=<?php echo urlencode($row['id']); ?>" class="px-2 font-weight-bold text-dark mt-0"><?php echo $row['title']; ?></a>
+                  <p class="text-dark px-2" style="font-size: 10px;"><?php echo $row['date']; ?> || Answers : <?php echo $num_rows ?></p>
+                </div>
+                </div>
+              <?php
+            }
+          
+          ?>
+        </div>
+      </div>
+    </div>
     <div class="row my-3">
       <?php
         $category = mysqli_query($conn, "SELECT * FROM category");
       ?>
-      <div class="card border-primary w-100">
-        <div class="card-header bg-primary text-white">
+      <div class="card border-info w-100">
+        <div class="card-header bg-info text-white">
           <p class="h3">Categories</p>
         </div>
         <div class="card-body ">
           <?php
             while ($row = mysqli_fetch_assoc($category)) {
                 ?>
-              <a class="font-weight-bold text-primary" href="category.php?category=<?php echo urlencode($row['name']); ?>"><?php echo $row['name']; ?></a><br>
+              <a class="font-weight-bold text-info" href="category.php?category=<?php echo urlencode($row['name']); ?>"><?php echo $row['name']; ?></a><br>
                 <?php
-            }
-          ?>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <?php
-        $post = mysqli_query($conn, "SELECT * FROM posts ORDER BY id DESC LIMIT 5");
-      ?>
-      <div class="card border-primary w-100">
-        <div class="card-header bg-primary text-white">
-          <p class="h3">Rescent Posts</p>
-        </div>
-        <div class="card-body ">
-          <?php
-            while ($row = mysqli_fetch_assoc($post)) {
-                ?>
-                <div class="row my-2">
-                <div class="col-5 p-0 m-0">
-                  <img src="<?php echo $row['image']; ?>" class="w-100 m-0">
-                </div>
-                <div class="col-7 p-0">
-                  <a href="fullpost.php?post=<?php echo urlencode($row['id']); ?>" class="px-2 font-weight-bold text-dark mt-0"><?php echo $row['title']; ?></a>
-                  <p class="text-dark px-2" style="font-size: 10px;"><?php echo $row['date']; ?></p>
-                </div>
-                </div>
-              <?php
             }
           ?>
         </div>
@@ -193,7 +254,7 @@
     }else{
 
 
-    $query = "INSERT INTO comment (username ,email ,comment , status , post_id , date ) VALUES ('{$name}' , '{$email}' ,'{$comment}' , '{0}' ,{$post_id} , '{$date}')";
+    $query = "INSERT INTO comment (username ,email ,comment , status , post_id , date ) VALUES ('{$name}' , '{$email}' ,'{$comment}' , '{1}' ,{$post_id} , '{$date}')";
     if (!mysqli_query($conn , $query)) {
       $_SESSION['message'] = "error:" . $query . "<br>". mysqli_error($conn);
     header("location:fullpost.php?post=". urlencode($post_id));

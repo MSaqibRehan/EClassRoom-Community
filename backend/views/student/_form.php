@@ -20,6 +20,10 @@ use kartik\date\DatePicker;
 
     <?= $form->field($model, 'std_father_name')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($umodel, 'username')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($umodel, 'password_hash')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($umodel, 'email')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'std_gender')->dropDownList([ 'Male' => 'Male', 'Female' => 'Female', ], ['prompt' => 'Select gender ...']) ?>
     <?php  
     echo '<label>Date of Birth</label>';

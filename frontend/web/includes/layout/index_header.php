@@ -48,7 +48,7 @@
             <div class="col-12 p-0">
                     <nav class="navbar navbar-expand-lg bg-dark py-0 pr-3" style="border-top: 5px solid #36B0DD; border-bottom: 5px solid #36B0DD;">
 
-                <a href="" class=" offset-1 navbar-brand js-scroll-trigger font-weight-bold p-1" style="color: #36B0DD; font-size: 25px; font-style: italic;"> My PHP Blog</a>
+                <a href="" class=" offset-1 navbar-brand js-scroll-trigger font-weight-bold p-1" style="color: #36B0DD; font-size: 25px; font-style: italic;"> eClassroom & Community</a>
                 <button class="navbar-toggler navbar-toggler-right text-uppercase bg-success text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fa fa-bars"></i>
@@ -56,26 +56,9 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav nav-pills w-100 ">
                         
-                        <li class="nav-item">
-                            <a class="nav-link py-3" href="">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active py-3" href="index.php">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link py-3" href="">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link py-3" href="">Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link py-3" href="">Contect Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link py-3" href="">Features</a>
-                        </li>
+                        
 
-           <form action="search.php" method="GET" class="my-auto offset-1">
+           <form action="search.php" method="GET" class="my-auto  ml-auto mr-5">
             <div class="input-group">
               <input type="text" name="query" class="form-control" placeholder="Search">
               <div class="input-group-append">
@@ -89,6 +72,10 @@
             </nav>
         </div>
             </div>
+
+
+
+
 
 
 

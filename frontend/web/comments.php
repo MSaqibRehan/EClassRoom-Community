@@ -46,10 +46,7 @@
       <a class="nav-link text-white" href="manageadmins.php"><i class="fa fa-user pr-2"></i>Manage Admins</a>
     </li>
      <li class="nav-item">
-      <a class="nav-link text-white  active" href="comments.php"><i class="fa fa-comment pr-2"></i>Comments <?php if($comment_count != 0){  echo "<span class='badge badge-warning p-2 ml-3'>".$comment_count."</span>"; } ?></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link text-white" href="index.php"><i class="fa fa-eye pr-2"></i>Live Blog</a>
+      <a class="nav-link text-white  active" href="comments.php"><i class="fa fa-comment pr-2"></i>Answers <?php if($comment_count != 0){  echo "<span class='badge badge-warning p-2 ml-3'>".$comment_count."</span>"; } ?></a>
     </li>
     <li class="nav-item">
       <a class="nav-link text-white" href="logout.php"><i class="fa fa-sign-out-alt pr-2"></i>logout</a>
@@ -62,7 +59,7 @@
                 message();
               }
             ?>
-    <p class="h2">DisApproved Comments</p>
+    <p class="h2">DisApproved Answers</p>
    
     <?php
     if (isset($_GET['query']) && isset($_GET['submit']) ) {
@@ -86,7 +83,7 @@
 $disapprove_count = mysqli_num_rows($record);
 echo  "<h2>Search Records For keyword : <span class='text-success'>".$query."</span></h2>";
         if(mysqli_num_rows($record) == 0){
-         echo  "No DisApproved comments match this keyword";
+         echo  "No DisApproved Answers match this keyword";
          
         }
 }else{
@@ -104,14 +101,14 @@ echo  "<h2>Search Records For keyword : <span class='text-success'>".$query."</s
           <th>Sr No.</th>
           <th>Date</th>
           <th>Name</th>
-          <th>Comment</th>
+          <th>Answer</th>
           <th>Approve</th>
           <th>Action</th>
           <th>Detail</th>
         </tr>
         <?php
         if ($disapprove_count == 0) {
-          echo "<tr><td colspan='7' class='font-weight-bold text-center'>No DisApproved Comments</td></tr>";
+          echo "<tr><td colspan='7' class='font-weight-bold text-center'>No DisApproved Answers</td></tr>";
         }else{
         $sr=1;
           while ($record_set =mysqli_fetch_assoc($record)) {
@@ -133,7 +130,6 @@ echo  "<h2>Search Records For keyword : <span class='text-success'>".$query."</s
           <a class="btn btn-danger text-white" onclick="return confirm('Are you Sure?')" href="?delete=<?php echo urlencode($record_set['id']); ?>">Delete</a>
            </td>
            <td>
-          <a target="_blank"class="btn btn-primary text-white" href="fullpost.php?post=<?php echo urlencode($record_set['post_id']); ?>">Live Preview</a>
            </td>
           
         </tr>
@@ -146,7 +142,7 @@ echo  "<h2>Search Records For keyword : <span class='text-success'>".$query."</s
        </table>
        </div>
        <br><hr><br>
- <p class="h2">Approved Comments</p>
+ <p class="h2">Approved Answers</p>
    
     <?php
      if (isset($_GET['query']) ) {
@@ -169,7 +165,7 @@ echo  "<h2>Search Records For keyword : <span class='text-success'>".$query."</s
  $approve_count = mysqli_num_rows($record);
 echo  "<h2>Search Records For keyword : ".$query."</h2>";
         if(mysqli_num_rows($record) == 0 &&  $approve_count == 0 ){
-          echo  "No Approved comments match this keyword";
+          echo  "No Approved Answers match this keyword";
           
         }
 }else{
@@ -187,7 +183,7 @@ echo  "<h2>Search Records For keyword : ".$query."</h2>";
           <th>Sr No.</th>
           <th>Date</th>
           <th>Name</th>
-          <th>Comment</th>
+          <th>Answers</th>
           <th>Approved_by</th>
           <th>Retrive approval</th>
           <th>Action</th>
@@ -195,7 +191,7 @@ echo  "<h2>Search Records For keyword : ".$query."</h2>";
         </tr>
         <?php
          if ($approve_count == 0) {
-          echo "<tr><td colspan='7' class='font-weight-bold text-center'>No Approved Comments</td></tr>";
+          echo "<tr><td colspan='7' class='font-weight-bold text-center'>No Approved Answers</td></tr>";
         }else{
         $sr=1;
           while ($record_set =mysqli_fetch_assoc($record)) {

@@ -73,8 +73,12 @@
             ?>
       <form action="" method="post" class="w-75 mx-auto" enctype="multipart/form-data" >
         <div class="form-group">
-          <label for="title">Post Title</label>
-          <input type="text" name="title" class="form-control" value="<?php echo $record_set['title'] ?>"  placeholder="Enter Post Title">
+          <label for="title">Email</label>
+          <input type="email" name="email" class="form-control" value="<?php echo $record_set['author_email'] ?>"  placeholder="Enter Your Email">
+        </div>
+        <div class="form-group">
+          <label for="title">Question</label>
+          <input type="text" name="title" class="form-control" value="<?php echo $record_set['title'] ?>"  placeholder="Enter Question">
         </div>
         <div class="my-2">
           <label for="categ">Select Category</label>
@@ -92,16 +96,10 @@
           ?>
         </select>
         </div>
+        
         <div class="form-group my-2">
-
-          
-           <p>Previous Banner:<img src="<?php echo $record_set['image']; ?>" width="100px" height="50" ></p>
-          <label for="image">Select Banner image</label>
-          <input type="file" name="image" class="form-control" id="image" placeholder="Enter Post Title">
-        </div>
-        <div class="form-group my-2">
-          <label for="text">Post Content</label>
-          <textarea name="content" class="form-control" rows="4" placeholder="Enter Content here"><?php echo $record_set['content']; ?></textarea>
+          <label for="text">Description</label>
+          <textarea name="content" class="form-control" rows="4" placeholder="Enter Description here"><?php echo $record_set['content']; ?></textarea>
         </div>
         <div class="form-group form-inline">
           <input type="submit" name="edit" value="UPDATE" class="btn btn-primary w-50">
@@ -119,18 +117,13 @@ if (isset($_POST['edit'])) {
   $title = mysqli_real_escape_string($conn , $_POST['title']);
   $category = mysqli_real_escape_string($conn , $_POST['category']);
   $content = mysqli_real_escape_string($conn , $_POST['content']);
-  $file_name=$_FILES["image"]["name"];
-  $temp_name=$_FILES["image"]["tmp_name"];
-  $imgtype=$_FILES["image"]["type"];
-  $ext= GetImageExtension($imgtype);
-  $imagename=$_FILES["image"]["name"];
-  $target_path = "images/".$imagename;
+ 
   date_default_timezone_set("Asia/Karachi");
   $date =  date("Y-m-d H:i:s");
   $author = $_SESSION['login_user'];
 
-  $target_path = "images/".$imagename;
- if (empty($title) || $category == -1 || !preg_match("/^[a-zA-Z 0-9]+$/" , $title)  ||( empty($imagename) && $record_set['image'] == null) ||$_FILES["image"]["size"] > 2000000 || $ext == 'false' ) {
+
+ if (empty($title) || $category == -1 || !preg_match("/^[a-zA-Z 0-9]+$/" , $title)  || empty($content)  ) {
       $_SESSION['message'] = null;
       if (empty($title)) {
         $_SESSION['message'] .= "<li>Enter post title</li>" ;
@@ -141,29 +134,18 @@ if (isset($_POST['edit'])) {
       if ( $category == -1){
         $_SESSION['message'] .= "<li>Please Select Category</li>";
       }
-      if (empty($imagename) && $record_set['image'] == "") {
-       $_SESSION['message'] .= "<li>Select an Image</li>" ;
-      }elseif ($_FILES["image"]["size"] > 2000000) {
-          $_SESSION['message'] .= "<li>Sorry, your file is too large.</li>";
-        }elseif($ext == 'false'){
-        $_SESSION['message'] .= "<li>Please Select .png/.jpg/.gif/.btm format image</li>";
+      if (empty($email)) {
+        $_SESSION['message'] .= "<li>Please Enter Your Email Address</li>"; 
+      }
+      if (empty($content)) {
+        $_SESSION['message'] .= "<li>Please Enter Description</li>"; 
       }
 
            
 header("editpost.php?post=".urlencode($safe_post_id));
     
-    }elseif($record_set['image'] != "" && empty($imagename)){
-      $query = "UPDATE posts SET date = '{$date}' , title = '{$title}' , category = '{$category}' , author = '{$author}', content = '{$content}' WHERE id = {$safe_post_id}";
-      if (mysqli_query($conn , $query)) {
-        $_SESSION['message'] = "Post Updated";
-        header("location:dashboard.php");
-      }else{
-         $_SESSION['message'] = $query .mysqli_error($conn);
-        header("editpost.php?post=".urlencode($safe_post_id));
-      }}else{
-        unlink($record_set['image']);
-        move_uploaded_file($temp_name, $target_path);
-         $query = "UPDATE posts SET date = '{$date}' , title = '{$title}' , category = '{$category}' , author = '{$author}', image = '{$target_path}' , content = '{$content}' WHERE id = {$safe_post_id}";
+    }else{
+         $query = "UPDATE posts SET date = '{$date}' , title = '{$title}' , category = '{$category}' , author = '{$author}', author_email = '{$email}' , content = '{$content}' WHERE id = {$safe_post_id}";
       if (mysqli_query($conn , $query)) {
         $_SESSION['message'] = "Post Updated";
         header("location:dashboard.php");

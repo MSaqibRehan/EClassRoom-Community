@@ -4,6 +4,8 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Student;
+use common\models\User;
+use common\models\StdEnrollment;
 use common\models\StudentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -82,7 +84,8 @@ class StudentController extends Controller
     public function actionCreate()
     {
         $request = Yii::$app->request;
-        $model = new Student();  
+        $model = new Student(); 
+        $umodel = new User();  
 
         if($request->isAjax){
             /*
@@ -94,6 +97,8 @@ class StudentController extends Controller
                     'title'=> "Create new Student",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
+                        'umodel' => $umodel,
+                        'enmodel' => $enmodel,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
@@ -118,6 +123,8 @@ class StudentController extends Controller
                     'title'=> "Create new Student",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
+                        'umodel' => $umodel,
+                        'enmodel' => $enmodel,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
@@ -133,6 +140,8 @@ class StudentController extends Controller
             } else {
                 return $this->render('create', [
                     'model' => $model,
+                    'umodel' => $umodel,
+                    'enmodel' => $enmodel,
                 ]);
             }
         }

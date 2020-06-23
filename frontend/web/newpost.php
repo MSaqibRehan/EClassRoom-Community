@@ -9,21 +9,6 @@
      header("location:login.php");
    }
 ?>
-<?php
-    function GetImageExtension($imagetype)
-    {
-       if(empty($imagetype)) return false;
-       switch($imagetype)
-       {
-           case 'image/bmp': return '.bmp';
-           case 'image/gif': return '.gif';
-           case 'image/jpeg': return '.jpg';
-           case 'image/png': return '.png';
-           default: return false;
-       }
-
-     }
-?> 
 <div class="row" style="min-height: 520px;">
 	<div class="col-md-2  bg-secondary pt-3">
       <?php 
@@ -37,7 +22,7 @@
       <a class="nav-link text-white " href="dashboard.php"><i class="fa fa-th pr-1"></i> Dashboard</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-white active" href="newpost.php"><i class="fa fa-list-alt pr-1"></i> Add New Post</a>
+      <a class="nav-link text-white active" href="newpost.php"><i class="fa fa-list-alt pr-1"></i> Add New Forum</a>
     </li>
     <li class="nav-item">
       <a class="nav-link text-white" href="categories.php"><i class="fa fa-tags pr-1"></i>Categories</a>
@@ -46,10 +31,7 @@
       <a class="nav-link text-white" href="manageadmins.php"><i class="fa fa-user pr-2"></i>Manage Admins</a>
     </li>
      <li class="nav-item">
-      <a class="nav-link text-white" href="comments.php"><i class="fa fa-comment pr-2"></i>Comments <?php if($comment_count != 0){  echo "<span class='badge badge-warning p-2 ml-3'>".$comment_count."</span>"; } ?></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link text-white" href="index.php"><i class="fa fa-eye pr-2"></i>Live Blog</a>
+      <a class="nav-link text-white" href="comments.php"><i class="fa fa-comment pr-2"></i>Answers <?php if($comment_count != 0){  echo "<span class='badge badge-warning p-2 ml-3'>".$comment_count."</span>"; } ?></a>
     </li>
     <li class="nav-item">
       <a class="nav-link text-white" href="logout.php"><i class="fa fa-sign-out-alt pr-2"></i>logout</a>
@@ -58,7 +40,7 @@
 	</div>
 	<div class="col-md-10">
 
-    <p class="h2">Add New Posts</p>
+    <p class="h2">Add New Forum</p>
             <?php 
               if (isset($_SESSION['message'])) {
                 message();
@@ -66,7 +48,11 @@
             ?>
       <form action="" method="post" class="w-75 mx-auto" enctype="multipart/form-data" >
         <div class="form-group">
-          <label for="title">Post Title</label>
+          <label for="text">Your Email</label>
+          <input type="email" name="email" class="form-control"  placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+          <label for="title">Question</label>
           <input type="text" name="title" class="form-control"  placeholder="Enter Post Title">
         </div>
         <div>
@@ -83,13 +69,10 @@
           ?>
         </select>
         </div>
+        
         <div class="form-group">
-          <label for="image">Select Banner image</label>
-          <input type="file" name="image" class="form-control" id="image" placeholder="Enter Post Title">
-        </div>
-        <div class="form-group">
-          <label for="text">Post Content</label>
-          <textarea name="content" class="form-control" rows="4" placeholder="Enter Content here"></textarea>
+          <label for="text">Description</label>
+          <textarea name="content" class="form-control" rows="4" placeholder="Enter description here"></textarea>
         </div>
         <div class="form-group form-inline">
           <input type="submit" name="newpost" value="Create Post" class="btn btn-primary w-50">
@@ -103,22 +86,16 @@
 </div>
 <?php
 if (isset($_POST['newpost'])) {
-  
+  $email = mysqli_real_escape_string($conn , $_POST['email']);
   $title = mysqli_real_escape_string($conn , $_POST['title']);
   $category = mysqli_real_escape_string($conn , $_POST['category']);
   $content = mysqli_real_escape_string($conn , $_POST['content']);
-  $file_name=$_FILES["image"]["name"];
-  $temp_name=$_FILES["image"]["tmp_name"];
-  $imgtype=$_FILES["image"]["type"];
-  $ext= GetImageExtension($imgtype);
-  $imagename=$_FILES["image"]["name"];
-  $target_path = "images/".$imagename;
+  
   date_default_timezone_set("Asia/Karachi");
  $date =  date("Y-m-d H:i:s");
   $author = $_SESSION['login_user'];
 
-  $target_path = "images/".$imagename;
- if (empty($title) || $category == -1 || !preg_match("/^[a-zA-Z 0-9#;]+$/" , $title)  || empty($imagename) ||$_FILES["image"]["size"] > 2000000 || $ext == 'false' ) {
+ if (empty($title) || empty($email) || empty($content) || $category == -1 || !preg_match("/^[a-zA-Z 0-9#;]+$/" , $title)  | ) {
       $_SESSION['message'] = null;
       if (empty($title)) {
         $_SESSION['message'] .= "<li>Enter user name</li>" ;
@@ -129,12 +106,11 @@ if (isset($_POST['newpost'])) {
       if ( $category == -1){
         $_SESSION['message'] .= "<li>Please Select Category</li>";
       }
-      if (empty($imagename)) {
-       $_SESSION['message'] .= "<li>Select an Image</li>" ;
-      }elseif ($_FILES["image"]["size"] > 2000000) {
-          $_SESSION['message'] .= "<li>Sorry, your file is too large.</li>";
-        }elseif($ext == 'false'){
-        $_SESSION['message'] .= "<li>Please Select .png/.jpg/.gif/.btm format image</li>";
+      if (empty($email)) {
+        $_SESSION['message'] .= "<li>Please Enter Your Email Address</li>"; 
+      }
+      if (empty($content)) {
+        $_SESSION['message'] .= "<li>Please Enter Description</li>"; 
       }
 
       
@@ -142,10 +118,10 @@ if (isset($_POST['newpost'])) {
       
 
     
-    }elseif(move_uploaded_file($temp_name, $target_path)){
-      $query = "INSERT INTO posts (date ,title,category,author,image,content) VALUES('{$date}' , '{$title}' , '{$category}' , '{$author}' , '{$target_path}' , '{$content}')";
+    }else{
+      $query = "INSERT INTO posts (date ,title,category,author,author_email ,content) VALUES('{$date}' , '{$title}' , '{$category}' , '{$author}' , '{$email}' , '{$content}')";
       if (mysqli_query($conn , $query)) {
-        $_SESSION['message'] = "New Post Added";
+        $_SESSION['message'] = "New Forum Added";
         header("location:dashboard.php");
       }else{
         $_SESSION['message'] = mysqli_error($conn);
