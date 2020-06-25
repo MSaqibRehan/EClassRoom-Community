@@ -37,14 +37,14 @@ class TeacherController extends Controller
 
     // =====================
 
-    public function actionSemSub($id){
+    public function actionSubs($id){
         $count = \common\models\SemesterSubjects::find()
-                        ->where(['sem_subj_id'=>$id,])
+                        ->where(['semester_id'=>$id,])
                         ->count();
 
         $semsubs = \common\models\SemesterSubjects::find()
-                        ->where(['sem_subj_id'=>$id])
-                        ->orderBy('id DESC')
+                        ->where(['semester_id'=>$id])
+                        ->orderBy('sem_subj_id DESC')
                         ->all();
         
         if($count > 0){
@@ -52,7 +52,7 @@ class TeacherController extends Controller
                 echo "<option value='".$subs->sem_subj_id."'>".$subs->subject_title."</option>";
             }
         }else{
-            echo "<option>-</option>";
+            echo "<option>--- No Subject Found -</option>";
         }
 
     }

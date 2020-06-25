@@ -75,7 +75,7 @@ use common\models\Session;
             <?php foreach ($tenmodel as $i => $tmodel): ?>
                 <div class="item panel panel-default"><!-- widgetBody -->
                     <div class="panel-heading">
-                        <h3 class="panel-title pull-left">Address</h3>
+                        <h3 class="panel-title pull-left">Teacher Class Assign</h3>
                         <div class="pull-right">
                             <button type="button" class="add-item btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></button>
                             <button type="button" class="remove-item btn btn-danger btn-xs"><i class="glyphicon glyphicon-minus"></i></button>
@@ -95,7 +95,7 @@ use common\models\Session;
                                     ArrayHelper::map(Semester::find()->all(),'semester_id','semester_no'),
                                     ['prompt'=>'Select Semester No ...',
                                 'onchange'=>'
-                                $.post("teacher/sem-sub&id="+$(this).val(), function( data ) {
+                                $.post("./find-sub?id="+$(this).val(), function( data ) {
                                 $( "select#semsub" ).html( data );
                                 });
                                 ']);?>

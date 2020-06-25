@@ -32,6 +32,25 @@ class SemesterSubjectsController extends Controller
         ];
     }
 
+
+    public function actionSemsub($id){
+        $count = \common\models\Semester::find()
+                        ->where(['course_p_id'=>$id,])
+                        ->count();
+
+        $semsubs = \common\models\Semester::find()
+                        ->where(['course_p_id'=>$id])
+                        ->all();
+        
+        if($count > 0){
+            foreach($semsubs as $subs){
+                echo "<option value='".$subs->semester_id."'>".$subs->semester_no."</option>";
+            }
+        }else{
+            echo "<option>--- No Semester Found -</option>";
+        }
+
+    }
     /**
      * Lists all SemesterSubjects models.
      * @return mixed
@@ -83,7 +102,8 @@ class SemesterSubjectsController extends Controller
     {
         $request = Yii::$app->request;
         $model = new SemesterSubjects();  
-
+        $model->created_by = Yii::$app->user->identity->id; 
+        $model->created_at = new \yii\db\Expression('NOW()');
         if($request->isAjax){
             /*
             *   Process for ajax request
@@ -99,12 +119,7 @@ class SemesterSubjectsController extends Controller
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
-             }else if($model->load($request->post()) && $model->validate()){
-                $model->created_by = Yii::$app->user->identity->id; 
-                $model->created_at = new \yii\db\Expression('NOW()');
-                $model->updated_by = '0';
-                $model->updated_at = '0'; 
-                $model->save();
+            }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Create new SemesterSubjects",
@@ -165,12 +180,7 @@ class SemesterSubjectsController extends Controller
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];         
-            }else if($model->load($request->post()) && $model->validate()){
-                $model->updated_by = Yii::$app->user->identity->id;
-                $model->updated_at = new \yii\db\Expression('NOW()');
-                $model->created_by = $model->created_by;
-                $model->created_at = $model->created_at;
-                $model->save();
+            }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "SemesterSubjects #".$id,

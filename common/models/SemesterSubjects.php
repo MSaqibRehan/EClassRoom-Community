@@ -8,22 +8,23 @@ use Yii;
  * This is the model class for table "semester_subjects".
  *
  * @property int $sem_subj_id
- * @property string $subj_1_title
- * @property string $subj_1_description
- * @property string $subj_2_title
- * @property string $subj_2_description
- * @property string $subj_3_title
- * @property string $subj_3_description
- * @property string|null $subj_4_title
- * @property string|null $subj_4_description
- * @property string|null $subj_5_title
- * @property string|null $subj_5_description
- * @property string|null $subj_6_title
- * @property string|null $subj_6_description
- * @property int $created_by
- * @property string $created_at
+ * @property int $course_p_id
+ * @property int $semester_id
+ * @property int $subject_no
+ * @property string $subject_title
+ * @property string $subject_description
+ * @property string $subject__code
+ * @property int|null $created_by
+ * @property string|null $created_at
  * @property int|null $updated_by
  * @property string|null $updated_at
+ *
+ * @property Announcement[] $announcements
+ * @property AssignmentUpload[] $assignmentUploads
+ * @property Quizz[] $quizzs
+ * @property CourseProgram $courseP
+ * @property Semester $semester
+ * @property TeacherClassEnrollment[] $teacherClassEnrollments
  */
 class SemesterSubjects extends \yii\db\ActiveRecord
 {
@@ -41,11 +42,14 @@ class SemesterSubjects extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['subj_1_title', 'subj_1_description', 'subj_2_title', 'subj_2_description', 'subj_3_title', 'subj_3_description'], 'required'],
-            [['created_by', 'updated_by'], 'integer'],
-            [['subj_1_title', 'subj_2_title', 'subj_3_title', 'subj_4_title', 'subj_5_title', 'subj_6_title'], 'string', 'max' => 100],
-            [['subj_1_description', 'subj_2_description', 'subj_3_description', 'subj_4_description', 'subj_5_description', 'subj_6_description'], 'string', 'max' => 255],
-            [['updated_by', 'updated_at', 'created_by', 'created_at'], 'safe'],
+            [['course_p_id', 'semester_id', 'subject_no', 'subject_title', 'subject_description', 'subject__code'], 'required'],
+            [['course_p_id', 'semester_id', 'subject_no', 'created_by', 'updated_by'], 'integer'],
+            [['created_at', 'updated_at'], 'safe'],
+            [['subject_title'], 'string', 'max' => 100],
+            [['subject_description'], 'string', 'max' => 255],
+            [['subject__code'], 'string', 'max' => 25],
+            [['course_p_id'], 'exist', 'skipOnError' => true, 'targetClass' => CourseProgram::className(), 'targetAttribute' => ['course_p_id' => 'cp_id']],
+            [['semester_id'], 'exist', 'skipOnError' => true, 'targetClass' => Semester::className(), 'targetAttribute' => ['semester_id' => 'semester_id']],
         ];
     }
 
@@ -56,22 +60,76 @@ class SemesterSubjects extends \yii\db\ActiveRecord
     {
         return [
             'sem_subj_id' => 'Sem Subj ID',
-            'subj_1_title' => 'Subj 1 Title',
-            'subj_1_description' => 'Subj 1 Description',
-            'subj_2_title' => 'Subj 2 Title',
-            'subj_2_description' => 'Subj 2 Description',
-            'subj_3_title' => 'Subj 3 Title',
-            'subj_3_description' => 'Subj 3 Description',
-            'subj_4_title' => 'Subj 4 Title',
-            'subj_4_description' => 'Subj 4 Description',
-            'subj_5_title' => 'Subj 5 Title',
-            'subj_5_description' => 'Subj 5 Description',
-            'subj_6_title' => 'Subj 6 Title',
-            'subj_6_description' => 'Subj 6 Description',
+            'course_p_id' => 'Course P ID',
+            'semester_id' => 'Semester ID',
+            'subject_no' => 'Subject No',
+            'subject_title' => 'Subject Title',
+            'subject_description' => 'Subject Description',
+            'subject__code' => 'Subject Code',
             'created_by' => 'Created By',
             'created_at' => 'Created At',
             'updated_by' => 'Updated By',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    /**
+     * Gets query for [[Announcements]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAnnouncements()
+    {
+        return $this->hasMany(Announcement::className(), ['sem_sub_id' => 'sem_subj_id']);
+    }
+
+    /**
+     * Gets query for [[AssignmentUploads]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAssignmentUploads()
+    {
+        return $this->hasMany(AssignmentUpload::className(), ['sem_sub_id' => 'sem_subj_id']);
+    }
+
+    /**
+     * Gets query for [[Quizzs]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getQuizzs()
+    {
+        return $this->hasMany(Quizz::className(), ['sem_sub_id' => 'sem_subj_id']);
+    }
+
+    /**
+     * Gets query for [[CourseP]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCourseP()
+    {
+        return $this->hasOne(CourseProgram::className(), ['cp_id' => 'course_p_id']);
+    }
+
+    /**
+     * Gets query for [[Semester]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSemester()
+    {
+        return $this->hasOne(Semester::className(), ['semester_id' => 'semester_id']);
+    }
+
+    /**
+     * Gets query for [[TeacherClassEnrollments]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTeacherClassEnrollments()
+    {
+        return $this->hasMany(TeacherClassEnrollment::className(), ['sem_sub_id' => 'sem_subj_id']);
     }
 }

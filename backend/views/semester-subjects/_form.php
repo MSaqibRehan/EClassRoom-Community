@@ -1,6 +1,11 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use common\models\SemesterSubjects;
+use common\models\Semester;
+use common\models\CourseProgram;
+use common\models\Session;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\SemesterSubjects */
@@ -11,29 +16,37 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'subj_1_title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'course_p_id')->dropDownList(
+        ArrayHelper::map(CourseProgram::find()->all(),'cp_id','cp_name'),
+        ['prompt'=>'Select Course Program ...',
+        'onchange'=>'
+        $.post("./semsub?id="+$(this).val(), function( data ) {
+        $( "select#semsub" ).html( data );
+        });
+        ']
+    )?>
 
-    <?= $form->field($model, 'subj_1_description')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'semester_id')->dropDownList(
+        ArrayHelper::map(Semester::find()->all(),'semester_id','semester_no'),
+        ['prompt'=>'Select Semester ...','id'=>'semsub']
+    )?>
 
-    <?= $form->field($model, 'subj_2_title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'subject_no')->textInput() ?>
 
-    <?= $form->field($model, 'subj_2_description')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'subject_title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'subj_3_title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'subject_description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'subj_3_description')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'subject__code')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'subj_4_title')->textInput(['maxlength' => true]) ?>
+    <!-- <?= $form->field($model, 'created_by')->textInput() ?>
 
-    <?= $form->field($model, 'subj_4_description')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'created_at')->textInput() ?>
 
-    <?= $form->field($model, 'subj_5_title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'updated_by')->textInput() ?>
 
-    <?= $form->field($model, 'subj_5_description')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'updated_at')->textInput() ?> -->
 
-    <?= $form->field($model, 'subj_6_title')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'subj_6_description')->textInput(['maxlength' => true]) ?>
   
 	<?php if (!Yii::$app->request->isAjax){ ?>
 	  	<div class="form-group">

@@ -74,6 +74,11 @@ return [
                 //tracher
                 'teacher' => 'teacher/index',
                 'create-teacher' => 'teacher/create',
+                'find-sub' => 'teacher/subs',
+
+                // sem subjs
+                'semester-subject' =>'semester-subjects/index',
+                'semsub'        => 'semester-subjects/semsub',
             ],
         ],
         
