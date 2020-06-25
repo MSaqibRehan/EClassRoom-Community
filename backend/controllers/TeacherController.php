@@ -5,11 +5,14 @@ namespace backend\controllers;
 use Yii;
 use common\models\Teacher;
 use common\models\TeacherSearch;
+use common\models\SemesterSubjects;
+use common\models\TeacherClassEnrollment;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
+use backend\models\Model;
 
 /**
  * TeacherController implements the CRUD actions for Teacher model.
@@ -30,6 +33,28 @@ class TeacherController extends Controller
                 ],
             ],
         ];
+    }
+
+    // =====================
+
+    public function actionSemSub($id){
+        $count = \common\models\SemesterSubjects::find()
+                        ->where(['sem_subj_id'=>$id,])
+                        ->count();
+
+        $semsubs = \common\models\SemesterSubjects::find()
+                        ->where(['sem_subj_id'=>$id])
+                        ->orderBy('id DESC')
+                        ->all();
+        
+        if($count > 0){
+            foreach($semsubs as $subs){
+                echo "<option value='".$subs->sem_subj_id."'>".$subs->subject_title."</option>";
+            }
+        }else{
+            echo "<option>-</option>";
+        }
+
     }
 
     /**
@@ -83,59 +108,55 @@ class TeacherController extends Controller
     {
         $request = Yii::$app->request;
         $model = new Teacher();  
-
-        if($request->isAjax){
-            /*
-            *   Process for ajax request
-            */
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            if($request->isGet){
-                return [
-                    'title'=> "Create new Teacher",
-                    'content'=>$this->renderAjax('create', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+        $tenmodel = [new TeacherClassEnrollment];  
+ 
         
-                ];         
-             }else if($model->load($request->post()) && $model->validate()){
-                $model->created_by = Yii::$app->user->identity->id; 
-                $model->created_at = new \yii\db\Expression('NOW()');
-                $model->updated_by = '0';
-                $model->updated_at = '0'; 
-                $model->save();
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new Teacher",
-                    'content'=>'<span class="text-success">Create Teacher success</span>',
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
-        
-                ];         
-            }else{           
-                return [
-                    'title'=> "Create new Teacher",
-                    'content'=>$this->renderAjax('create', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
-            }
-        }else{
+ 
             /*
             *   Process for non-ajax request
             */
-            if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->teacher_id]);
+            if ($model->load($request->post())) {
+                $tenmodel = Model::createMultiple(TeacherClassEnrollment::classname());
+                Model::loadMultiple($tenmodel, Yii::$app->request->post());
+
+                // validate all models
+                $valid = $model->validate();
+                $valid = Model::validateMultiple($tenmodel) && $valid;
+
+                if ($valid) {
+                    $transaction = \Yii::$app->db->beginTransaction();
+                    try {
+                        if ($flag = $model->save(false)) {
+                            foreach ($tenmodel as $ten) {
+                                $ten->teacher_id = $model->teacher_id;
+                                $ten->created_at = new \yii\db\Expression('NOW()');
+                                $ten->created_by = Yii::$app->user->identity->id;  
+                                if (! ($flag = $ten->save(false))) {
+                                    $transaction->rollBack();
+                                    var_dump($ten->geterrors());
+                                    break;
+                                }
+                            }
+                        }
+                        if ($flag) {
+                            $transaction->commit();
+                            return $this->redirect(['./teacher']);
+                        }
+                    } catch (Exception $e) {
+                        $transaction->rollBack();
+                    }
+                }else{
+                    var_dump($model->getErrors());
+                    echo "<br>";
+                    print_r($tenmodel);
+                }
             } else {
                 return $this->render('create', [
                     'model' => $model,
+                    'tenmodel' => (empty($tenmodel)) ? [new TeacherClassEnrollment] : $tenmodel,
                 ]);
             }
-        }
+        
        
     }
 

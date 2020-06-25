@@ -36,7 +36,8 @@ legend {
 <div class="student-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    
+
+    <?= $form->field($umodel, 'user_type')->hiddenInput(['value' => 'student'])->label(false); ?>
     <fieldset>
   <legend>Student Details</legend>
     <div class="rows">
@@ -45,6 +46,9 @@ legend {
         </div>
         <div class="col-md-6">
             <?= $form->field($model, 'std_father_name')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-md-6">
+            <?= $form->field($model, 'std_cnic')->widget(yii\widgets\MaskedInput::class, [ 'mask' => '99999-9999999-9', ]) ?>
         </div>
         <div class="col-md-6">
             <?= $form->field($model, 'std_reg_no')->textInput(['maxlength' => true]) ?>
@@ -72,7 +76,7 @@ legend {
                 ?>
             
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <?= $form->field($model, 'std_address')->textarea(['rows' => 6]) ?>
         </div>
     </div>

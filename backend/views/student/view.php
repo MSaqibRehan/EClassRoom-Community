@@ -32,10 +32,11 @@ use yii\widgets\DetailView;
         'model' => $model,
         'attributes' => [
             //'std_id',
-            'user_id',
+            // 'user_id',
             'std_reg_no',
             'std_name',
             'std_father_name',
+            'std_cnic',
             'std_gender',
             'std_dob',
             'std_address:ntext',

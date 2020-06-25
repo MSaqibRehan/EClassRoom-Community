@@ -42,12 +42,12 @@ class Student extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'std_reg_no', 'std_name', 'std_father_name', 'std_gender', 'std_dob', 'std_address', 'std_mobile_no', 'status' ], 'required'],
+            [['user_id', 'std_reg_no', 'std_name', 'std_father_name', 'std_gender', 'std_dob', 'std_address', 'std_mobile_no', 'status', 'std_cnic' ], 'required'],
             [['user_id', 'created_by', 'updated_by'], 'integer'],
             [['std_gender', 'std_address', 'status'], 'string'],
             [['std_dob', 'updated_by', 'updated_at', 'created_by', 'created_at'], 'safe'],
             [['std_reg_no', 'std_name', 'std_father_name'], 'string', 'max' => 255],
-            [['std_mobile_no'], 'string', 'max' => 15],
+            [['std_mobile_no','std_cnic'], 'string', 'max' => 15],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
@@ -67,6 +67,7 @@ class Student extends \yii\db\ActiveRecord
             'std_dob' => 'Std Dob',
             'std_address' => 'Std Address',
             'std_mobile_no' => 'Std Mobile No',
+            'std_cnic'  => 'Std CNIC No',
             'status' => 'Status',
             'created_by' => 'Created By',
             'created_at' => 'Created At',

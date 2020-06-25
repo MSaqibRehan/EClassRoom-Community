@@ -36,9 +36,9 @@ class TeacherClassEnrollment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['teacher_id', 'session_id', 'semester_id'], 'required'],
+            [[ 'session_id', 'semester_id','sem_sub_id'], 'required'],
             [['teacher_id', 'session_id', 'semester_id', 'created_by', 'updated_by'], 'integer'],
-            [['updated_by', 'updated_at', 'created_by', 'created_at'], 'safe'],
+            [['updated_by', 'updated_at', 'created_by', 'created_at','teacher_id',], 'safe'],
             [['teacher_id'], 'exist', 'skipOnError' => true, 'targetClass' => Teacher::className(), 'targetAttribute' => ['teacher_id' => 'teacher_id']],
             [['semester_id'], 'exist', 'skipOnError' => true, 'targetClass' => Semester::className(), 'targetAttribute' => ['semester_id' => 'semester_id']],
             [['session_id'], 'exist', 'skipOnError' => true, 'targetClass' => Session::className(), 'targetAttribute' => ['session_id' => 'session_id']],
@@ -55,6 +55,7 @@ class TeacherClassEnrollment extends \yii\db\ActiveRecord
             'teacher_id' => 'Teacher Name',
             'session_id' => 'Session Duration',
             'semester_id' => 'Semester No',
+            'sem_sub_id' => 'Semester Subject',
             'created_by' => 'Created By',
             'created_at' => 'Created At',
             'updated_by' => 'Updated By',

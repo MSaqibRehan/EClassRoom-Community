@@ -10,5 +10,6 @@ use yii\helpers\Html;
 <div class="teacher-create">
     <?= $this->render('_form', [
         'model' => $model,
+        'tenmodel' => $tenmodel,
     ]) ?>
 </div>
