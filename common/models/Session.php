@@ -11,12 +11,17 @@ use Yii;
  * @property string $session_duration
  * @property string $session_start_date
  * @property string $session_end_date
+ * @property string $intake 
  * @property string $status
- * @property int $created_by
- * @property string $created_at
+ * @property int|null $created_by
+ * @property string|null $created_at
  * @property int|null $updated_by
  * @property string|null $updated_at
  *
+ * @property Announcement[] $announcements 
+ * @property AssignmentUpload[] $assignmentUploads 
+ * @property Inbox[] $inboxes 
+ * @property Quizz[] $quizzs 
  * @property StdEnrollment[] $stdEnrollments
  * @property TeacherClassEnrollment[] $teacherClassEnrollments
  */
@@ -36,9 +41,9 @@ class Session extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['session_duration', 'session_start_date', 'session_end_date', 'status'], 'required'],
+            [['session_duration', 'session_start_date', 'session_end_date', 'intake', 'status'], 'required'],
             [['session_start_date', 'session_end_date', 'updated_by', 'updated_at', 'created_by', 'created_at'], 'safe'],
-            [['status'], 'string'],
+            [['intake','status'], 'string'],
             [['created_by', 'updated_by'], 'integer'],
             [['session_duration'], 'string', 'max' => 20],
         ];
@@ -81,4 +86,44 @@ class Session extends \yii\db\ActiveRecord
     {
         return $this->hasMany(TeacherClassEnrollment::className(), ['session_id' => 'session_id']);
     }
+      /** 
+    * Gets query for [[Announcements]]. 
+    * 
+    * @return \yii\db\ActiveQuery 
+    */ 
+   public function getAnnouncements() 
+   { 
+       return $this->hasMany(Announcement::className(), ['session_id' => 'session_id']); 
+   } 
+ 
+   /** 
+    * Gets query for [[AssignmentUploads]]. 
+    * 
+    * @return \yii\db\ActiveQuery 
+    */ 
+   public function getAssignmentUploads() 
+   { 
+       return $this->hasMany(AssignmentUpload::className(), ['session_id' => 'session_id']); 
+   } 
+ 
+   /** 
+    * Gets query for [[Inboxes]]. 
+    * 
+    * @return \yii\db\ActiveQuery 
+    */ 
+   public function getInboxes() 
+   { 
+       return $this->hasMany(Inbox::className(), ['session_id' => 'session_id']); 
+   } 
+ 
+   /** 
+    * Gets query for [[Quizzs]]. 
+    * 
+    * @return \yii\db\ActiveQuery 
+    */ 
+   public function getQuizzs() 
+   { 
+       return $this->hasMany(Quizz::className(), ['session_id' => 'session_id']); 
+   }
+
 }

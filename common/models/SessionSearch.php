@@ -19,7 +19,7 @@ class SessionSearch extends Session
     {
         return [
             [['session_id', 'created_by', 'updated_by'], 'integer'],
-            [['session_duration', 'session_start_date', 'session_end_date', 'status', 'created_at', 'updated_at'], 'safe'],
+            [['session_duration', 'session_start_date', 'session_end_date', 'intake', 'status', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -66,7 +66,8 @@ class SessionSearch extends Session
         ]);
 
         $query->andFilterWhere(['like', 'session_duration', $this->session_duration])
-            ->andFilterWhere(['like', 'status', $this->status]);
+              ->andFilterWhere(['like', 'intake', $this->intake])
+              ->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;
     }

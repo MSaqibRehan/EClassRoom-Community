@@ -10,6 +10,7 @@ use Yii;
  * @property int $std_id
  * @property int $user_id
  * @property string $std_reg_no
+ * @property string $std_cnic
  * @property string $std_name
  * @property string $std_father_name
  * @property string $std_gender
@@ -17,11 +18,13 @@ use Yii;
  * @property string $std_address
  * @property string $std_mobile_no
  * @property string $status
- * @property int $created_by
- * @property string $created_at
+ * @property int|null $created_by
+ * @property string|null $created_at
  * @property int|null $updated_by
  * @property string|null $updated_at
  *
+ * @property AssignmentSubmit[] $assignmentSubmits 
+ * @property QuizzRemarks[] $quizzRemarks 
  * @property StdEnrollment[] $stdEnrollments
  * @property User $user
  */
@@ -95,4 +98,23 @@ class Student extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
+    /** 
+    * Gets query for [[AssignmentSubmits]]. 
+    * 
+    * @return \yii\db\ActiveQuery 
+    */ 
+   public function getAssignmentSubmits() 
+   { 
+       return $this->hasMany(AssignmentSubmit::className(), ['std_id' => 'std_id']); 
+   } 
+ 
+   /** 
+    * Gets query for [[QuizzRemarks]]. 
+    * 
+    * @return \yii\db\ActiveQuery 
+    */ 
+   public function getQuizzRemarks() 
+   { 
+       return $this->hasMany(QuizzRemarks::className(), ['std_id' => 'std_id']); 
+   }
 }

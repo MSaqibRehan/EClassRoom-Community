@@ -14,10 +14,10 @@ return [
     //     'class'=>'\kartik\grid\DataColumn',
     //     'attribute'=>'teacher_id',
     // ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'user_id',
-    ],
+    // [
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'attribute'=>'user_id',
+    // ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'teacher_name',
@@ -25,6 +25,10 @@ return [
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'teacher_father',
+    ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'teacher_cnic',
     ],
     [
         'class'=>'\kartik\grid\DataColumn',

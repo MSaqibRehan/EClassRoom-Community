@@ -18,7 +18,7 @@ class TeacherClassEnrollmentSearch extends TeacherClassEnrollment
     public function rules()
     {
         return [
-            [['tce_id', 'teacher_id', 'session_id', 'semester_id', 'created_by', 'updated_by'], 'integer'],
+            [['tce_id', 'teacher_id', 'session_id', 'semester_id', 'sem_sub_id', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -58,6 +58,7 @@ class TeacherClassEnrollmentSearch extends TeacherClassEnrollment
         $query->joinWith('teacher');
         $query->joinWith('semester');
         $query->joinWith('session');
+        $query->joinWith('semSub');
 
         $query->andFilterWhere([
             'tce_id' => $this->tce_id,
@@ -72,7 +73,8 @@ class TeacherClassEnrollmentSearch extends TeacherClassEnrollment
 
         $query->andFilterWhere(['like', 'teacher.teacher_name', $this->teacher_id])
               ->andFilterWhere(['like', 'semester.semester_no', $this->semester_id])
-              ->andFilterWhere(['like', 'session.session_duration', $this->session_id]);
+              ->andFilterWhere(['like', 'session.session_duration', $this->session_id])
+              ->andFilterWhere(['like', 'semSub.subject_title', $this->sem_sub_id]);
 
         return $dataProvider;
     }

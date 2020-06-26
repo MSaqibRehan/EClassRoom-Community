@@ -32,9 +32,9 @@ use yii\widgets\DetailView;
         'model' => $model,
         'attributes' => [
             //'std_enrol_id',
-            'std_id',
-            'session_id',
-            'semester_id',
+            'std.std_name',
+            'session.session_duration',
+            'semester.semester_no',
             //'created_by',
             'created_at',
             //'updated_by',

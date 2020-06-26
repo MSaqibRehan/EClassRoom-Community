@@ -19,7 +19,7 @@ class TeacherSearch extends Teacher
     {
         return [
             [['teacher_id', 'user_id', 'created_by', 'updated_by'], 'integer'],
-            [['teacher_name', 'teacher_father', 'teacher_mobile_no', 'teacher_gender', 'teacher_dob', 'teacher_address', 'status', 'created_at', 'updated_at'], 'safe'],
+            [['teacher_name', 'teacher_father', 'teacher_mobile_no', 'teacher_cnic', 'teacher_gender', 'teacher_dob', 'teacher_address', 'status', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -66,11 +66,12 @@ class TeacherSearch extends Teacher
         ]);
 
         $query->andFilterWhere(['like', 'teacher_name', $this->teacher_name])
-            ->andFilterWhere(['like', 'teacher_father', $this->teacher_father])
-            ->andFilterWhere(['like', 'teacher_mobile_no', $this->teacher_mobile_no])
-            ->andFilterWhere(['like', 'teacher_gender', $this->teacher_gender])
-            ->andFilterWhere(['like', 'teacher_address', $this->teacher_address])
-            ->andFilterWhere(['like', 'status', $this->status]);
+              ->andFilterWhere(['like', 'teacher_father', $this->teacher_father])
+              ->andFilterWhere(['like', 'teacher_cnic', $this->teacher_cnic]) 
+              ->andFilterWhere(['like', 'teacher_mobile_no', $this->teacher_mobile_no])
+              ->andFilterWhere(['like', 'teacher_gender', $this->teacher_gender])
+              ->andFilterWhere(['like', 'teacher_address', $this->teacher_address])
+              ->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;
     }

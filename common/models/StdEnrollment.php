@@ -11,8 +11,8 @@ use Yii;
  * @property int $std_id
  * @property int $session_id
  * @property int $semester_id
- * @property int $created_by
- * @property string $created_at
+ * @property int|null $created_by
+ * @property string|null $created_at
  * @property int|null $updated_by
  * @property string|null $updated_at
  *
