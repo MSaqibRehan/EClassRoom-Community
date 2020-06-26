@@ -21,7 +21,7 @@ use frontend\models\SignupForm;
  */
 class TeacherController extends Controller
 {
-    /**
+    /** 
      * @inheritdoc
      */
     public function behaviors()
@@ -118,27 +118,33 @@ class TeacherController extends Controller
             /*
             *   Process for non-ajax request
             */
-            if ($model->load($request->post())) {
+            if ($model->load($request->post()) && $umodel->load($request->post())) {
+
                 $tenmodel = Model::createMultiple(TeacherClassEnrollment::classname());
                 Model::loadMultiple($tenmodel, Yii::$app->request->post());
 
                 // validate all models
                 $valid = $model->validate();
+                $valid = $umodel->validate() && $valid;
                 $valid = Model::validateMultiple($tenmodel) && $valid;
 
                 if ($valid) {
                     $transaction = \Yii::$app->db->beginTransaction();
                     $model->status="Active";
                     try {
-                        if ($flag = $model->save(false)) {
-                            foreach ($tenmodel as $ten) {
-                                $ten->teacher_id = $model->teacher_id;
-                                $ten->created_at = new \yii\db\Expression('NOW()');
-                                $ten->created_by = Yii::$app->user->identity->id;  
-                                if (! ($flag = $ten->save(false))) {
-                                    $transaction->rollBack();
-                                    var_dump($ten->geterrors());
-                                    break;
+                        if ($flag = $umodel->signup(false)) {
+                            $uid=User::find()->orderBy(['id'=>SORT_DESC])->one();
+                            $model->user_id=$uid->id;
+                            if ($flag = $model->save(false)) {
+                                foreach ($tenmodel as $ten) {
+                                    $ten->teacher_id = $model->teacher_id;
+                                    $ten->created_at = new \yii\db\Expression('NOW()');
+                                    $ten->created_by = Yii::$app->user->identity->id;  
+                                    if (! ($flag = $ten->save(false))) {
+                                        $transaction->rollBack();
+                                        var_dump($ten->geterrors());
+                                        break;
+                                    }
                                 }
                             }
                         }
