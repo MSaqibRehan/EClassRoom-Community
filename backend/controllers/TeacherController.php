@@ -13,6 +13,8 @@ use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
 use backend\models\Model;
+use common\models\User;
+use frontend\models\SignupForm;
 
 /**
  * TeacherController implements the CRUD actions for Teacher model.
@@ -108,6 +110,7 @@ class TeacherController extends Controller
     {
         $request = Yii::$app->request;
         $model = new Teacher();  
+        $umodel = new SignupForm();   
         $tenmodel = [new TeacherClassEnrollment];  
  
         
@@ -125,6 +128,7 @@ class TeacherController extends Controller
 
                 if ($valid) {
                     $transaction = \Yii::$app->db->beginTransaction();
+                    $model->status="Active";
                     try {
                         if ($flag = $model->save(false)) {
                             foreach ($tenmodel as $ten) {
@@ -154,6 +158,7 @@ class TeacherController extends Controller
                 return $this->render('create', [
                     'model' => $model,
                     'tenmodel' => (empty($tenmodel)) ? [new TeacherClassEnrollment] : $tenmodel,
+                    'umodel' => $umodel,
                 ]);
             }
         

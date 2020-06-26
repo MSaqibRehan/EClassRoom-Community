@@ -10,45 +10,100 @@ use common\models\Session;
 /* @var $this yii\web\View */
 /* @var $model common\models\Teacher */
 /* @var $form yii\widgets\ActiveForm */
+$this->title = 'Register Teacher';
+$this->params['breadcrumbs'][] = $this->title;
+
+
 ?>
+<style type="text/css">
+    fieldset {
+  display: block;
+        margin: 20px 0px;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+  border: 2px groove #3C8CBC;
+}
+legend {
+    width:inherit; /* Or auto */
+    padding:0 10px; /* To give a bit of padding on the left and right */
+    border-bottom:none;
+    font-size:30px;
+    font-weight: bold;
+    font-style: italic;
+}
+</style>
 
 <div class="teacher-form">
 
     <?php $form = ActiveForm::begin(['id' => 'teacher-form']); ?>
-
-    <?= $form->field($model, 'user_id')->textInput() ?>
-
-    <?= $form->field($model, 'teacher_name')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'teacher_father')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'teacher_cnic')->widget(yii\widgets\MaskedInput::class, [ 'mask' => '99999-9999999-9', ]) ?>
-
-    <?= $form->field($model, 'teacher_mobile_no')->widget(yii\widgets\MaskedInput::class, [ 'mask' => '+99-999-9999999', ]) ?>
-
-    <?= $form->field($model, 'teacher_gender')->dropDownList([ 'Male' => 'Male', 'Female' => 'Female', ], ['prompt' => 'Select gender ...']) ?>
+    <fieldset>
+        <legend>Teacher Personal Details</legend>
     
-    <?php  
-    echo '<label>Date of Birth</label>';
-    echo DatePicker::widget([
-    'model' => $model, 
-    'attribute' => 'teacher_dob',
-    'options' => ['placeholder' => 'Select date ...'],
-    'convertFormat' => false,
-    'pluginOptions' => [        
-        'format' => 'yyyy-m-d',
-        'autoclose'=>true,
-        'todayHighlight' => true
-    ]
-    ]);
-    ?>
+        <div class="row">
+            <div class="col-md-6">
+                <?= $form->field($model, 'teacher_name')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class="col-md-6">
+                <?= $form->field($model, 'teacher_father')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class="col-md-6">
+                <?= $form->field($model, 'teacher_cnic')->widget(yii\widgets\MaskedInput::class, [ 'mask' => '99999-9999999-9', ]) ?>
+            </div>
+            <div class="col-md-6">
+                <?= $form->field($model, 'teacher_mobile_no')->widget(yii\widgets\MaskedInput::class, [ 'mask' => '+99-999-9999999', ]) ?>
+            </div>
+            <div class="col-md-6">
+                <?= $form->field($model, 'teacher_gender')->dropDownList([ 'Male' => 'Male', 'Female' => 'Female', ], ['prompt' => 'Select gender ...']) ?>
+            </div>
+            <div class="col-md-6">
+                <?php  
+                    echo '<label>Date of Birth</label>';
+                    echo DatePicker::widget([
+                    'model' => $model, 
+                    'attribute' => 'teacher_dob',
+                    'options' => ['placeholder' => 'Select date ...'],
+                    'convertFormat' => false,
+                    'pluginOptions' => [        
+                        'format' => 'yyyy-m-d',
+                        'autoclose'=>true,
+                        'todayHighlight' => true
+                    ]
+                    ]);
+                    ?>           
+            </div>
+            <div class="col-md-12">
+                <?= $form->field($model, 'teacher_address')->textarea(['rows' => 6]) ?>            
+            </div>
+        </div>
+    </fieldset>
+    
+    <!-- ============================================== =================== -->
+    <?= $form->field($umodel, 'user_type')->hiddenInput(['value' => 'teacher'])->label(false); ?>
+   <fieldset>
+        <legend>Teacher Login Details</legend>
+        <div class="row">
+            
+            <div class="col-md-6">
+                <?= $form->field($umodel, 'username')->textInput(['autofocus' => true]) ?>
+            </div>
+            <div class="col-md-6">
+                <?= $form->field($umodel, 'password')->passwordInput() ?>
+            </div>
+            <div class="col-md-12">
+                <?= $form->field($umodel, 'email') ?>
+            </div>
+        </div>
+    </fieldset>
+ 
+
+    
     <br>
 
-    <?= $form->field($model, 'teacher_address')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'status')->dropDownList([ 'Active' => 'Active', 'Inactive' => 'Inactive', ], ['prompt' => 'Select Status ...']) ?>
-
-
+    
     <!-- ========================================= -->
+    
 
     <div class="panel panel-default">
         <div class="panel-heading"><h4><i class="glyphicon glyphicon-envelope"></i> Teacher </h4></div>
