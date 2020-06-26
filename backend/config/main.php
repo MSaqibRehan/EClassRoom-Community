@@ -79,6 +79,9 @@ return [
                 // sem subjs
                 'semester-subject' =>'semester-subjects/index',
                 'semsub'        => 'semester-subjects/semsub',
+
+                'inbox'     => 'inbox/index',
+                'send-message'=> 'inbox/send',
             ],
         ],
         

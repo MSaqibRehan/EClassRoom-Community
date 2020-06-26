@@ -55,9 +55,7 @@ class InboxSearch extends Inbox
             return $dataProvider;
         }
 
-        $query->joinWith('courseP');
-        $query->joinWith('semester');
-        $query->joinWith('session');
+
 
         $query->andFilterWhere([
             'inbox_id' => $this->inbox_id,
@@ -69,9 +67,7 @@ class InboxSearch extends Inbox
         ]);
 
         $query->andFilterWhere(['like', 'message', $this->message])
-            ->andFilterWhere(['like', 'courseP.cp_name', $this->status])
-            ->andFilterWhere(['like', 'semester.semester_no', $this->semester_id])
-            ->andFilterWhere(['like', 'session.session_duration', $this->session_id]);
+          ;
 
         return $dataProvider;
     }
