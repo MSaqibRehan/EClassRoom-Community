@@ -19,7 +19,7 @@ class SemesterSearch extends Semester
     {
         return [
             [['semester_id', 'course_p_id', 'created_by', 'updated_by'], 'integer'],
-            [['semester_no', 'created_at', 'updated_at'], 'safe'],
+            [['semester_no', 'class_time', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -67,7 +67,8 @@ class SemesterSearch extends Semester
         ]);
 
         $query->andFilterWhere(['like', 'semester_no', $this->semester_no])
-              ->andFilterWhere(['like', 'course_program.cp_name', $this->course_p_id]);;
+              ->andFilterWhere(['like', 'course_program.cp_name', $this->course_p_id])
+              ->andFilterWhere(['like', 'class_time', $this->class_time]);
 
         return $dataProvider;
     }

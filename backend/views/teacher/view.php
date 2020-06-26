@@ -35,6 +35,7 @@ use yii\widgets\DetailView;
             'user_id',
             'teacher_name',
             'teacher_father',
+            'teacher_cnic', 
             'teacher_mobile_no',
             'teacher_gender',
             'teacher_dob',

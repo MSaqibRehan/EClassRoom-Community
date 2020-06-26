@@ -19,7 +19,7 @@ class StudentSearch extends Student
     {
         return [
             [['std_id', 'user_id', 'created_by', 'updated_by'], 'integer'],
-            [['std_reg_no', 'std_name', 'std_father_name', 'std_gender','std_cnic', 'std_dob', 'std_address', 'std_mobile_no', 'status', 'created_at', 'updated_at'], 'safe'],
+            [['std_reg_no', 'std_cnic', 'std_name', 'std_father_name', 'std_gender','std_cnic', 'std_dob', 'std_address', 'std_mobile_no', 'status', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -66,11 +66,11 @@ class StudentSearch extends Student
         ]);
 
         $query->andFilterWhere(['like', 'std_reg_no', $this->std_reg_no])
+            ->andFilterWhere(['like', 'std_cnic', $this->std_cnic]) 
             ->andFilterWhere(['like', 'std_name', $this->std_name])
             ->andFilterWhere(['like', 'std_father_name', $this->std_father_name])
             ->andFilterWhere(['like', 'std_gender', $this->std_gender])
             ->andFilterWhere(['like', 'std_address', $this->std_address])
-            ->andFilterWhere(['like', 'std_cnic', $this->std_cnic])
             ->andFilterWhere(['like', 'std_mobile_no', $this->std_mobile_no])
             ->andFilterWhere(['like', 'status', $this->status]);
 

@@ -44,6 +44,8 @@ use kartik\date\DatePicker;
     ]);
     ?>
 
+    <?= $form->field($model, 'intake')->dropDownList([ 'Spring' => 'Spring', 'Fall' => 'Fall', ], ['prompt' => 'Select Season....']) ?>
+
     <?= $form->field($model, 'status')->dropDownList([ 'Active' => 'Active', 'Inactive' => 'Inactive', ], ['prompt' => '']) ?>
 
   

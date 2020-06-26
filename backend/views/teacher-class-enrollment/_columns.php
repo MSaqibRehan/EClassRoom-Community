@@ -29,6 +29,11 @@ return [
         'attribute'=>'semester_id',
         'value'=>'semester.semester_no',
     ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'sem_sub_id',
+        'value'=>'semSub.subject_title',
+    ],
     // [
     //     'class'=>'\kartik\grid\DataColumn',
     //     'attribute'=>'created_by',

@@ -28,6 +28,10 @@ return [
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'intake',
+    ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'status',
     ],
     // [

@@ -36,6 +36,7 @@ use yii\widgets\DetailView;
             'session_duration',
             'session_start_date',
             'session_end_date',
+            'intake', 
             'status',
             //'created_by',
             'created_at',

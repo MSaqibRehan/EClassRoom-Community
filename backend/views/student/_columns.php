@@ -14,13 +14,17 @@ return [
     //     'class'=>'\kartik\grid\DataColumn',
     //     'attribute'=>'std_id',
     // ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'user_id',
-    ],
+    // [
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'attribute'=>'user_id',
+    // ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'std_reg_no',
+    ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'std_cnic',
     ],
     [
         'class'=>'\kartik\grid\DataColumn',

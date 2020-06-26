@@ -11,16 +11,20 @@ use Yii;
  * @property int $user_id
  * @property string $teacher_name
  * @property string $teacher_father
+ * @property string $teacher_cnic 
  * @property string $teacher_mobile_no
  * @property string $teacher_gender
  * @property string $teacher_dob
  * @property string $teacher_address
  * @property string $status
- * @property int $created_by
- * @property string $created_at
- * @property int $updated_by
- * @property string $updated_at
+ * @property int|null $created_by
+ * @property string|null $created_at
+ * @property int|null $updated_by
+ * @property string|null $updated_at
  *
+ * @property Announcement[] $announcements 
+ * @property AssignmentUpload[] $assignmentUploads 
+ * @property Quizz[] $quizzs 
  * @property User $user
  * @property TeacherClassEnrollment[] $teacherClassEnrollments
  */
@@ -45,7 +49,7 @@ class Teacher extends \yii\db\ActiveRecord
             [['teacher_gender', 'teacher_address', 'status'], 'string'],
             [['teacher_dob', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'safe'],
             [['teacher_name', 'teacher_father'], 'string', 'max' => 255],
-            [['teacher_mobile_no'], 'string', 'max' => 15],
+            [['teacher_cnic', 'teacher_mobile_no'], 'string', 'max' => 15],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
@@ -60,7 +64,7 @@ class Teacher extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'teacher_name' => 'Teacher Name',
             'teacher_father' => 'Teacher Father',
-            'teacher_cnic' => 'Teacher cnic',
+            'teacher_cnic' => 'Teacher CNIC',
             'teacher_mobile_no' => 'Teacher Mobile No',
             'teacher_gender' => 'Teacher Gender',
             'teacher_dob' => 'Teacher Dob',
@@ -92,4 +96,33 @@ class Teacher extends \yii\db\ActiveRecord
     {
         return $this->hasMany(TeacherClassEnrollment::className(), ['teacher_id' => 'teacher_id']);
     }
+    /** 
+    * Gets query for [[Announcements]]. 
+    * 
+    * @return \yii\db\ActiveQuery 
+    */ 
+   public function getAnnouncements() 
+   { 
+       return $this->hasMany(Announcement::className(), ['teacher_id' => 'teacher_id']); 
+   } 
+ 
+   /** 
+    * Gets query for [[AssignmentUploads]]. 
+    * 
+    * @return \yii\db\ActiveQuery 
+    */ 
+   public function getAssignmentUploads() 
+   { 
+       return $this->hasMany(AssignmentUpload::className(), ['uploaded_by' => 'teacher_id']); 
+   } 
+ 
+   /** 
+    * Gets query for [[Quizzs]]. 
+    * 
+    * @return \yii\db\ActiveQuery 
+    */ 
+   public function getQuizzs() 
+   { 
+       return $this->hasMany(Quizz::className(), ['uploaded_by' => 'teacher_id']); 
+   }
 }
