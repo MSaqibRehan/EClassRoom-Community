@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
+use yii\web\UploadedFile;
 
 /**
  * AssignmentUploadController implements the CRUD actions for AssignmentUpload model.
@@ -99,9 +100,25 @@ class AssignmentUploadController extends Controller
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
-            }else if($model->load($request->post()) && $model->validate()){
-                $model->created_at = new \yii\db\Expression('NOW()');
-                $model->save();
+            }else if($model->load($request->post())){
+                            // checking the field
+                    if(!empty($model->assign_file)){
+                        // making the name of the file
+                        $fileName = $model->assign_title.'_file';
+                        // getting extension of the file
+                        $fileExtension = $model->assign_file->extension;
+                        // save the path of the file in backend/web/uploads 
+                        $model->assign_file->saveAs('uploads/'.$fileName.'.'.$fileExtension);
+                        //save the path in the db column
+                        $model->assign_file = 'uploads/'.$fileName.'.'.$fileExtension;
+                    }
+                    else {
+                       $model->assign_file = 'uploads/'.'default-file-name.jpg'; 
+                    }
+                    
+                    //$model->uploaded_by = Yii::$app->user->identity->id;
+                    $model->created_at = new \yii\db\Expression('NOW()');
+                    $model->save();
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Create new AssignmentUpload",

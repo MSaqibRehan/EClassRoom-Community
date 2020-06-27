@@ -10,7 +10,7 @@ use yii\widgets\DetailView;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'assign_id',
+            //'assign_id',
             'session_id',
             'semester_id',
             'sem_sub_id',

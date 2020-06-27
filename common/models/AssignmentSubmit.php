@@ -51,8 +51,8 @@ class AssignmentSubmit extends \yii\db\ActiveRecord
     {
         return [
             'assign_sub_id' => 'Assign Sub ID',
-            'assign_id' => 'Assign ID',
-            'std_id' => 'Std ID',
+            'assign_id' => 'Assignment Title',
+            'std_id' => 'Student',
             'attach_file' => 'Attach File',
             'submit_date' => 'Submit Date',
             'status' => 'Status',

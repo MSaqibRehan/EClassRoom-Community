@@ -31,9 +31,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'total_marks')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->dropDownList([ 'Active' => 'Active', 'Closed' => 'Closed', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
+    <?= $form->field($model, 'status')->dropDownList([ 'Active' => 'Active', 'Closed' => 'Closed', ], ['prompt' => 'Select Status...']) ?>
 
   
 	<?php if (!Yii::$app->request->isAjax){ ?>

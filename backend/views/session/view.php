@@ -33,6 +33,7 @@ use yii\widgets\DetailView;
         'model' => $model,
         'attributes' => [
             //'session_id',
+            'courseP.cp_name',
             'session_duration',
             'session_start_date',
             'session_end_date',

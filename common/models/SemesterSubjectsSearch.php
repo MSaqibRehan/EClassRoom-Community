@@ -55,10 +55,13 @@ class SemesterSubjectsSearch extends SemesterSubjects
             return $dataProvider;
         }
 
+        $query->joinWith('semester');
+        $query->joinWith('courseP');
+
         $query->andFilterWhere([
             'sem_subj_id' => $this->sem_subj_id,
-            'course_p_id' => $this->course_p_id,
-            'semester_id' => $this->semester_id,
+            //'course_p_id' => $this->course_p_id,
+            //'semester_id' => $this->semester_id,
             'subject_no' => $this->subject_no,
             'created_by' => $this->created_by,
             'created_at' => $this->created_at,
@@ -67,6 +70,8 @@ class SemesterSubjectsSearch extends SemesterSubjects
         ]);
 
         $query->andFilterWhere(['like', 'subject_title', $this->subject_title])
+            ->andFilterWhere(['like', 'courseP.cp_name', $this->course_p_id])
+            ->andFilterWhere(['like', 'semester.semester_no', $this->semester_id])
             ->andFilterWhere(['like', 'subject_description', $this->subject_description])
             ->andFilterWhere(['like', 'subject__code', $this->subject__code]);
 

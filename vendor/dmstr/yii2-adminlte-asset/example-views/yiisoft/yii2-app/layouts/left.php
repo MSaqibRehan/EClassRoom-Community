@@ -36,6 +36,12 @@
                     ['label' => 'Student Enrollment', 'icon' => 'file-text-o', 'url' => ['/std-enrollment']],
                     ['label' => 'Teacher', 'icon' => 'user', 'url' => ['/teacher']],
                     ['label' => 'Teacher Class Enrollment', 'icon' => 'file-text', 'url' => ['/teacher-class-enrollment']],
+                    ['label' => 'Assignment Upload', 'icon' => 'arrow-right', 'url' => ['/assignment-upload']],
+                    ['label' => 'Assignment Submit', 'icon' => 'arrow-right', 'url' => ['/assignment-submit']],
+                    ['label' => 'Assignment Remarks', 'icon' => 'arrow-right', 'url' => ['/assignment-remarks']],
+                    ['label' => 'Inbox', 'icon' => 'arrow-right', 'url' => ['/inbox']],
+                    ['label' => 'Quizz', 'icon' => 'arrow-right', 'url' => ['/quizz']],
+                    ['label' => 'Quizz Remarks', 'icon' => 'arrow-right', 'url' => ['/quizz-remarks']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
                         'label' => 'System Settings',

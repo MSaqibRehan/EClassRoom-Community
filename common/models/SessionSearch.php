@@ -18,7 +18,7 @@ class SessionSearch extends Session
     public function rules()
     {
         return [
-            [['session_id', 'created_by', 'updated_by'], 'integer'],
+            [['session_id', 'course_p_id',  'created_by', 'updated_by'], 'integer'],
             [['session_duration', 'session_start_date', 'session_end_date', 'intake', 'status', 'created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -55,6 +55,8 @@ class SessionSearch extends Session
             return $dataProvider;
         }
 
+        $query->joinWith('courseP');
+
         $query->andFilterWhere([
             'session_id' => $this->session_id,
             'session_start_date' => $this->session_start_date,
@@ -66,8 +68,9 @@ class SessionSearch extends Session
         ]);
 
         $query->andFilterWhere(['like', 'session_duration', $this->session_duration])
-              ->andFilterWhere(['like', 'intake', $this->intake])
-              ->andFilterWhere(['like', 'status', $this->status]);
+            ->andFilterWhere(['like', 'courseP.cp_name', $this->course_p_id])
+            ->andFilterWhere(['like', 'intake', $this->intake])
+            ->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;
     }

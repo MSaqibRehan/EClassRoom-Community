@@ -14,6 +14,11 @@ return [
     //     'class'=>'\kartik\grid\DataColumn',
     //     'attribute'=>'session_id',
     // ],
+    [ 
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'course_p_id',
+        'value'=>'courseP.cp_name',
+    ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'session_duration',

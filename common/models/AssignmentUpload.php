@@ -65,9 +65,9 @@ class AssignmentUpload extends \yii\db\ActiveRecord
     {
         return [
             'assign_id' => 'Assign ID',
-            'session_id' => 'Session ID',
-            'semester_id' => 'Semester ID',
-            'sem_sub_id' => 'Sem Sub ID',
+            'session_id' => 'Session Duration',
+            'semester_id' => 'Semester No',
+            'sem_sub_id' => 'Semester Subject',
             'uploaded_by' => 'Uploaded By',
             'assign_no' => 'Assignment No',
             'assign_title' => 'Assign Title',

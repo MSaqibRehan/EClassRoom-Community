@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use common\models\Assignment;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -9,13 +10,16 @@ use yii\widgets\ActiveForm;
 
 <div class="assignment-submit-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-    <?= $form->field($model, 'assign_id')->textInput() ?>
+    <?= $form->field($model, 'assign_id')->dropDownList(
+                ArrayHelper::map(Assignment::find()->all(),'assign_id','assign_title'),
+                ['prompt'=>'Select Assignment ...',]
+    )?>
 
     <?= $form->field($model, 'std_id')->textInput() ?>
 
-    <?= $form->field($model, 'attach_file')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'attach_file')->fileInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'submit_date')->textInput() ?>
 

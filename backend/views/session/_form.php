@@ -1,7 +1,9 @@
 <?php
 use yii\helpers\Html;
+use common\models\CourseProgram;
 use yii\widgets\ActiveForm;
 use kartik\date\DatePicker;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Session */
@@ -11,6 +13,11 @@ use kartik\date\DatePicker;
 <div class="session-form">
 
     <?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field($model, 'course_p_id')->dropDownList(
+                ArrayHelper::map(CourseProgram::find()->all(),'cp_id','cp_name'),
+                ['prompt'=>'Select Course Program ...',]
+    )?>
 
     <?= $form->field($model, 'session_duration')->textInput(['maxlength' => true]) ?>
 
@@ -46,7 +53,7 @@ use kartik\date\DatePicker;
 
     <?= $form->field($model, 'intake')->dropDownList([ 'Spring' => 'Spring', 'Fall' => 'Fall', ], ['prompt' => 'Select Season....']) ?>
 
-    <?= $form->field($model, 'status')->dropDownList([ 'Active' => 'Active', 'Inactive' => 'Inactive', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'status')->dropDownList([ 'Active' => 'Active', 'Inactive' => 'Inactive', ], ['prompt' => 'Select Status...']) ?>
 
   
 	<?php if (!Yii::$app->request->isAjax){ ?>

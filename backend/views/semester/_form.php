@@ -21,7 +21,7 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'semester_no')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'class_time')->dropDownList([ 'Morning' => 'Morning', 'Evening' => 'Evening', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'class_time')->dropDownList([ 'Morning' => 'Morning', 'Evening' => 'Evening', ], ['prompt' => 'Select Class Time...']) ?>
 
   
 	<?php if (!Yii::$app->request->isAjax){ ?>

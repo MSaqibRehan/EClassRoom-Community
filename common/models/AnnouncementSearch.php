@@ -72,7 +72,7 @@ class AnnouncementSearch extends Announcement
         ]);
 
         $query->andFilterWhere(['like', 'announcement', $this->announcement])
-            ->andFilterWhere(['like', 'courseP.cp_name', $this->status])
+            ->andFilterWhere(['like', 'courseP.cp_name', $this->course_p_id])
             ->andFilterWhere(['like', 'teacher.teacher_name', $this->teacher_id])
             ->andFilterWhere(['like', 'semester.semester_no', $this->semester_id])
             ->andFilterWhere(['like', 'session.session_duration', $this->session_id])

@@ -44,7 +44,7 @@ class SemesterSubjects extends \yii\db\ActiveRecord
         return [
             [['course_p_id', 'semester_id', 'subject_no', 'subject_title', 'subject_description', 'subject__code'], 'required'],
             [['course_p_id', 'semester_id', 'subject_no', 'created_by', 'updated_by'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at', 'created_by', 'updated_by'], 'safe'],
             [['subject_title'], 'string', 'max' => 100],
             [['subject_description'], 'string', 'max' => 255],
             [['subject__code'], 'string', 'max' => 25],
@@ -60,8 +60,8 @@ class SemesterSubjects extends \yii\db\ActiveRecord
     {
         return [
             'sem_subj_id' => 'Sem Subj ID',
-            'course_p_id' => 'Course P ID',
-            'semester_id' => 'Semester ID',
+            'course_p_id' => 'Course Program',
+            'semester_id' => 'Semester No',
             'subject_no' => 'Subject No',
             'subject_title' => 'Subject Title',
             'subject_description' => 'Subject Description',
