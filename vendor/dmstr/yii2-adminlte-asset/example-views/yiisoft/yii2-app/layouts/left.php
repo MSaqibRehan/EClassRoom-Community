@@ -36,6 +36,7 @@
                     ['label' => 'Student Enrollment', 'icon' => 'file-text-o', 'url' => ['/std-enrollment']],
                     ['label' => 'Teacher', 'icon' => 'user', 'url' => ['/teacher']],
                     ['label' => 'Teacher Class Enrollment', 'icon' => 'file-text', 'url' => ['/teacher-class-enrollment']],
+                    ['label' => 'Announcements', 'icon' => 'arrow-right', 'url' => ['/announcement']],
                     ['label' => 'Assignment Upload', 'icon' => 'arrow-right', 'url' => ['/assignment-upload']],
                     ['label' => 'Assignment Submit', 'icon' => 'arrow-right', 'url' => ['/assignment-submit']],
                     ['label' => 'Assignment Remarks', 'icon' => 'arrow-right', 'url' => ['/assignment-remarks']],
