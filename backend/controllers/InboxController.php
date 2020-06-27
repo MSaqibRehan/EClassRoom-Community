@@ -16,6 +16,17 @@ use yii\helpers\Html;
  */
 class InboxController extends Controller
 {
+
+
+    protected function beforeRun()
+    {
+        $this->controller->enableCsrfValidation = false;
+        return parent::beforeRun();
+    }
+
+    public function actionSend(){
+        return $this->renderAjax('send');
+    }
     /**
      * @inheritdoc
      */
