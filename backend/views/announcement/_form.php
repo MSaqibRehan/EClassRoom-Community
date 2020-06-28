@@ -33,7 +33,7 @@ use yii\helpers\ArrayHelper;
     )?>
 
     <?= $form->field($model, 'sem_sub_id')->dropDownList(
-                ArrayHelper::map(SemesterSubjects::find()->all(),'sem_sub_id','subject_title'),
+                ArrayHelper::map(SemesterSubjects::find()->all(),'sem_subj_id','subject_title'),
                 ['prompt'=>'Select Semester Subject ...',]
     )?>
 
