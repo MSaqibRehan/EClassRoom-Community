@@ -43,6 +43,7 @@ class SemesterSubjectsController extends Controller
                         ->all();
         
         if($count > 0){
+            echo "<option>--- Choose Semester ---</option>";
             foreach($semsubs as $subs){
                 echo "<option value='".$subs->semester_id."'>".$subs->semester_no."</option>";
             }

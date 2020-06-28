@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
     }
    
 
-   echo 'user_id : ' . $usr_id . ' <br> session_id : ' .$session_id . '<br> semester_id : ' . $semester_id . ' <br> course_p_id : ' . $course_p_id ;
+   //echo 'user_id : ' . $usr_id . ' <br> session_id : ' .$session_id . '<br> semester_id : ' . $semester_id . ' <br> course_p_id : ' . $course_p_id ;
 
 
 
@@ -142,7 +142,7 @@ $this->params['breadcrumbs'][] = $this->title;
               </form>
             </div>
             <!-- /.box-footer-->
-          </div>
+          </div> 
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
@@ -160,7 +160,7 @@ $this->params['breadcrumbs'][] = $this->title;
         var course=$('#course').val();
 
         $.ajax({
-            url : "./send-message",
+            url : "../send-message",
             method:"POST",
             data:{ message:message, user:user ,session:session ,semester:semester ,course:course},           
             success:function(data){

@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
 use yii\web\UploadedFile;
+use common\models\Teacher;
 
 /**
  * AssignmentUploadController implements the CRUD actions for AssignmentUpload model.
@@ -84,6 +85,11 @@ class AssignmentUploadController extends Controller
     {
         $request = Yii::$app->request;
         $model = new AssignmentUpload();  
+        $model->created_at = date('Y-m-d h:m:s');
+        $model->status = 'Active';
+        $usr_id= \Yii::$app->user->identity->id;
+        $teacher_table=Teacher::find()->where(['user_id'=>$usr_id])->one();
+        $model->uploaded_by = $teacher_table->teacher_id;
 
         if($request->isAjax){
             /*
@@ -100,33 +106,35 @@ class AssignmentUploadController extends Controller
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
-            }else if($model->load($request->post())){
-                            // checking the field
-                    if(!empty($model->assign_file)){
-                        // making the name of the file
-                        $fileName = $model->assign_title.'_file';
-                        // getting extension of the file
-                        $fileExtension = $model->assign_file->extension;
-                        // save the path of the file in backend/web/uploads 
-                        $model->assign_file->saveAs('uploads/'.$fileName.'.'.$fileExtension);
-                        //save the path in the db column
-                        $model->assign_file = 'uploads/'.$fileName.'.'.$fileExtension;
-                    }
-                    else {
-                       $model->assign_file = 'uploads/'.'default-file-name.jpg'; 
-                    }
+            }else if($model->load($request->post()) ){
+
+                if ($model->validate()) {
+                    $model->assign_file = UploadedFile::GetInstance($model, 'assign_file'); 
                     
-                    //$model->uploaded_by = Yii::$app->user->identity->id;
-                    $model->created_at = new \yii\db\Expression('NOW()');
+                    $im_name = $model->assign_title; 
+                
+                    $model->assign_file->SaveAs('uploads/' . $im_name . '.' . $model->assign_file->extension);
+                    $model->assign_file = 'uploads/' . $im_name . '.' . $model->assign_file->extension;
                     $model->save();
-                return [
+                    return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Create new AssignmentUpload",
                     'content'=>'<span class="text-success">Create AssignmentUpload success</span>',
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
         
-                ];         
+                ]; 
+                }else{
+                    return [
+                    'forceReload'=>'#crud-datatable-pjax',
+                    'title'=> "Create new AssignmentUpload",
+                    'content'=>print_r($model->getErrors()),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                        ];
+                }
+                    
+                        
             }else{           
                 return [
                     'title'=> "Create new AssignmentUpload",

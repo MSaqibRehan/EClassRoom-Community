@@ -1,7 +1,9 @@
 <?php
 use yii\helpers\Html;
-use common\models\Assignment;
+use common\models\AssignmentUpload;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+
 
 /* @var $this yii\web\View */
 /* @var $model common\models\AssignmentSubmit */
@@ -13,7 +15,7 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'assign_id')->dropDownList(
-                ArrayHelper::map(Assignment::find()->all(),'assign_id','assign_title'),
+                ArrayHelper::map(AssignmentUpload::find()->all(),'assign_id','assign_title'),
                 ['prompt'=>'Select Assignment ...',]
     )?>
 
