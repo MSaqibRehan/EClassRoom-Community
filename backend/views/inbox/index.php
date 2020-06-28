@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
     }
    
 
-   echo 'user_id : ' . $usr_id . ' <br> session_id : ' .$session_id . '<br> semester_id : ' . $semester_id . ' <br> course_p_id : ' . $course_p_id ;
+   //echo 'user_id : ' . $usr_id . ' <br> session_id : ' .$session_id . '<br> semester_id : ' . $semester_id . ' <br> course_p_id : ' . $course_p_id ;
 
 
 

@@ -2,52 +2,43 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'IUB E-Classroom & Community';
 ?>
-<div class="site-index">
+<?php $announcementData = Yii::$app->db->createCommand("SELECT * FROM announcement WHERE status = 'Active'")->queryAll();
+                        //$msg = $message[0]['announcement']; 
+    $countannouncementData = count($announcementData);
+    for ($i = 0; $i < $countannouncementData; $i++) {
+        $msg = $announcementData[$i]['announcement'];
+        $created_at = $announcementData[$i]['created_at'];
+        $teacher_id = $announcementData[$i]['teacher_id'];
+        $teacherName = Yii::$app->db->createCommand("SELECT teacher_name FROM teacher WHERE teacher_id = '$teacher_id'")->queryAll();
+        $teacher_name = $teacherName[0]['teacher_name'];
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+?>
+      <div class="row">
+        <div class="col-md-12 col-sm-6 col-xs-12">
+          <div class="info-box bg-aqua callout-warning">
+            <span class="info-box-icon"><i class="fa fa-microphone"></i></span>
+            <div class="info-box-content">
+              <h4 style="float: left;">Announcement by Teacher: <i style="font-size: 22px;"><?=$teacher_name; ?></i> !</h4>  
+              <h4 style="float:right">
+                <?php
+                echo $created_at;
+                ?> 
+              </h4>  
+              <br><br>
+              <div class="progress">
+                <div class="progress-bar" style="width: 100%"></div>
+              </div>
+                <span class="progress-description" style="font-size: 22px;">
+                    <marquee onmouseover="this.stop();" onmouseout="this.start();">
+                      <?php                         
+                        echo $msg;
+                      ?>
+                    </marquee>
+                </span>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
+          </div>
         </div>
-
-    </div>
-</div>
+      </div>
+<?php } ?>
