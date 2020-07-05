@@ -82,8 +82,33 @@ return [
 
                 'inbox'     => 'inbox/index',
                 'send-message'=> 'inbox/send',
-
+                // 
+                'subjects' => 'semester/subjects',
                 ///////
+                'submit-assignment' => 'assignment-submit/index',
+                'assignment' => 'assignment-submit/assignment',
+                'download-file' => 'assignment-submit/download',
+                'submission'=>'assignment-submit/submission',
+                'mark-assignments'  => 'assignment-upload/view',
+                'mark'  =>  'assignment-upload/mark',
+                'delete-assignment' => 'assignment-submit/deleteas',
+
+
+                'mark-quiz'  => 'assignment-upload/view',
+                'markq'  =>  'assignment-upload/mark',
+                'delete-quiz' => 'assignment-submit/deleteas',
+
+                'mark-quiz' =>'quizz-remarks/create',
+                'mark-quiz-update' =>'quizz-remarks/update',
+
+                'upload-key' =>'quiz-key/create',
+                'quiz-key-update' =>'quiz-key/update',
+                'quiz-key-delete' =>'quiz-key/deletekey',
+                'quiz-detail' => 'quizz/view',
+
+                'mark-assignment' => 'assignment-remarks/create',
+                'mark-update' => 'assignment-remarks/update',
+                'quiz-view'     => 'quizz/quiz',
                 
             ],
         ],

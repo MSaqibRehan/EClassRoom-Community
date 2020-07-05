@@ -99,9 +99,9 @@ class QuizzRemarksController extends Controller
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
-            }else if($model->load($request->post()) && $model->validate()){
-                $model->created_at = new \yii\db\Expression('NOW()');
-                $model->save();
+            }else if($model->load($request->post()) && $model->save()){
+               
+                
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Create new QuizzRemarks",
@@ -126,7 +126,7 @@ class QuizzRemarksController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->quizz_remark_id]);
+                echo "<script>window.close();</script>";
             } else {
                 return $this->render('create', [
                     'model' => $model,
@@ -189,7 +189,7 @@ class QuizzRemarksController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->quizz_remark_id]);
+                echo "<script>window.close();</script>";
             } else {
                 return $this->render('update', [
                     'model' => $model,

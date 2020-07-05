@@ -19,7 +19,7 @@ class QuizzRemarksSearch extends QuizzRemarks
     {
         return [
             [['quizz_remark_id', 'quizz_id', 'std_id'], 'integer'],
-            [['remarks', 'obt_marks', 'quizz_key', 'created_at'], 'safe'],
+            [['remarks', 'obt_marks', 'created_at'], 'safe'],
         ];
     }
 
@@ -63,8 +63,7 @@ class QuizzRemarksSearch extends QuizzRemarks
         ]);
 
         $query->andFilterWhere(['like', 'remarks', $this->remarks])
-            ->andFilterWhere(['like', 'obt_marks', $this->obt_marks])
-            ->andFilterWhere(['like', 'quizz_key', $this->quizz_key]);
+            ->andFilterWhere(['like', 'obt_marks', $this->obt_marks]);
 
         return $dataProvider;
     }

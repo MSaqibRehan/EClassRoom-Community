@@ -175,4 +175,13 @@ return array (
       '@wbraganca/dynamicform' => $vendorDir . '/wbraganca/yii2-dynamicform/src',
     ),
   ),
+  'perminder-klair/yii2-dropzone' => 
+  array (
+    'name' => 'perminder-klair/yii2-dropzone',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@kato' => $vendorDir . '/perminder-klair/yii2-dropzone',
+    ),
+  ),
 );

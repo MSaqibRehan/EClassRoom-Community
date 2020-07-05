@@ -44,10 +44,10 @@ class Quizz extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['course_p_id', 'session_id', 'semester_id', 'sem_sub_id', 'uploaded_by', 'quizz_no', 'quizz_title', 'quizz_file', 'total_marks', 'status', 'created_at'], 'required'],
+            [['course_p_id', 'session_id', 'semester_id', 'sem_sub_id', 'uploaded_by', 'quizz_no', 'quizz_title', 'total_marks', 'status', 'created_at'], 'required'],
             [['course_p_id', 'session_id', 'semester_id', 'sem_sub_id', 'uploaded_by', 'quizz_no'], 'integer'],
             [['quizz_note', 'status'], 'string'],
-            [['created_at'], 'safe'],
+            [['created_at', 'quizz_file'], 'safe'],
             [['quizz_title', 'quizz_file'], 'string', 'max' => 255],
             [['total_marks'], 'string', 'max' => 20],
             [['course_p_id'], 'exist', 'skipOnError' => true, 'targetClass' => CourseProgram::className(), 'targetAttribute' => ['course_p_id' => 'cp_id']],

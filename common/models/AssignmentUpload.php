@@ -10,7 +10,7 @@ use Yii;
  * @property int $assign_id
  * @property int $session_id
  * @property int $semester_id
- * @property int $sem_sub_id
+ * @property int $sem_sub_id 
  * @property int $uploaded_by
  * @property int $assign_no
  * @property string $assign_title
@@ -49,7 +49,7 @@ class AssignmentUpload extends \yii\db\ActiveRecord
             [['assign_note', 'status'], 'string'],
             [[ 'created_at', 'assign_file'], 'safe'],
             [['assign_title'], 'string', 'max' => 200],
-            [['assign_file'], 'string', 'max' => 255],
+
             [['total_marks'], 'string', 'max' => 20],
             [['session_id'], 'exist', 'skipOnError' => true, 'targetClass' => Session::className(), 'targetAttribute' => ['session_id' => 'session_id']],
             [['semester_id'], 'exist', 'skipOnError' => true, 'targetClass' => Semester::className(), 'targetAttribute' => ['semester_id' => 'semester_id']],

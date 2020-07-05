@@ -34,12 +34,11 @@ class QuizzRemarks extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['quizz_id', 'std_id', 'remarks', 'obt_marks', 'quizz_key', 'created_at'], 'required'],
+            [['quizz_id', 'std_id', 'remarks', 'obt_marks', 'created_at'], 'required'],
             [['quizz_id', 'std_id'], 'integer'],
             [['remarks'], 'string'],
             [['created_at'], 'safe'],
             [['obt_marks'], 'string', 'max' => 20],
-            [['quizz_key'], 'string', 'max' => 255],
             [['quizz_id'], 'exist', 'skipOnError' => true, 'targetClass' => Quizz::className(), 'targetAttribute' => ['quizz_id' => 'quizz_id']],
             [['std_id'], 'exist', 'skipOnError' => true, 'targetClass' => Student::className(), 'targetAttribute' => ['std_id' => 'std_id']],
         ];

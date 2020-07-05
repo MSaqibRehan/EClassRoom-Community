@@ -83,56 +83,17 @@ class AssignmentRemarksController extends Controller
     {
         $request = Yii::$app->request;
         $model = new AssignmentRemarks();  
-
-        if($request->isAjax){
-            /*
-            *   Process for ajax request
-            */
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            if($request->isGet){
-                return [
-                    'title'=> "Create new AssignmentRemarks",
-                    'content'=>$this->renderAjax('create', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
-            }else if($model->load($request->post()) && $model->validate()){
-                $model->created_at = new \yii\db\Expression('NOW()');
-                $model->save();
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new AssignmentRemarks",
-                    'content'=>'<span class="text-success">Create AssignmentRemarks success</span>',
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
-        
-                ];         
-            }else{           
-                return [
-                    'title'=> "Create new AssignmentRemarks",
-                    'content'=>$this->renderAjax('create', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
-            }
-        }else{
             /*
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->assign_remark_id]);
+                echo "<script>window.close();</script>";
             } else {
                 return $this->render('create', [
                     'model' => $model,
                 ]);
             }
-        }
+        
        
     }
 
@@ -148,54 +109,17 @@ class AssignmentRemarksController extends Controller
         $request = Yii::$app->request;
         $model = $this->findModel($id);       
 
-        if($request->isAjax){
-            /*
-            *   Process for ajax request
-            */
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            if($request->isGet){
-                return [
-                    'title'=> "Update AssignmentRemarks #".$id,
-                    'content'=>$this->renderAjax('update', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-                ];         
-            }else if($model->load($request->post()) && $model->validate()){
-                $model->created_at = new \yii\db\Expression('NOW()');
-                $model->save();
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "AssignmentRemarks #".$id,
-                    'content'=>$this->renderAjax('view', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
-                ];    
-            }else{
-                 return [
-                    'title'=> "Update AssignmentRemarks #".$id,
-                    'content'=>$this->renderAjax('update', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-                ];        
-            }
-        }else{
             /*
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->assign_remark_id]);
+                echo "<script>window.close();</script>";
             } else {
                 return $this->render('update', [
                     'model' => $model,
                 ]);
             }
-        }
+        
     }
 
     /**

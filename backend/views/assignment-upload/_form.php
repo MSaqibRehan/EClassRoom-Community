@@ -31,7 +31,7 @@ use yii\helpers\ArrayHelper;
                 ArrayHelper::map(Session::find()->all(),'session_id','session_duration'),
                 ['prompt'=>'Select Session Duration ...',]
     )?>
-
+ 
     <?= $form->field($model, 'semester_id')->dropDownList(
                 ArrayHelper::map(Semester::find()->all(),'semester_id','semester_no'),
                 ['prompt'=>'Select Semester No ...','id'=>'semsub',

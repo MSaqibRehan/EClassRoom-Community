@@ -10,7 +10,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
-
+use common\models\Teacher;
+use yii\web\UploadedFile;
 /**
  * QuizzController implements the CRUD actions for Quizz model.
  */
@@ -29,7 +30,11 @@ class QuizzController extends Controller
                     'bulk-delete' => ['post'],
                 ],
             ],
-        ];
+        ]; 
+    }
+
+    public function actionQuiz(){
+        return $this->render('quiz');
     }
 
     /**
@@ -82,7 +87,12 @@ class QuizzController extends Controller
     public function actionCreate()
     {
         $request = Yii::$app->request;
-        $model = new Quizz();  
+        $model = new Quizz(); 
+        $model->created_at = date('Y-m-d h:m:s');
+        $model->status = 'Active';
+        $usr_id= \Yii::$app->user->identity->id;
+        $teacher_table=Teacher::find()->where(['user_id'=>$usr_id])->one();
+        $model->uploaded_by = $teacher_table->teacher_id; 
 
         if($request->isAjax){
             /*
@@ -99,17 +109,34 @@ class QuizzController extends Controller
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
-            }else if($model->load($request->post()) && $model->validate()){
-                $model->created_at = new \yii\db\Expression('NOW()');
-                $model->save();
-                return [
+            }else if($model->load($request->post()) ){
+
+                if ($model->validate()) {
+                    $model->quizz_file = UploadedFile::GetInstance($model, 'quizz_file'); 
+                    
+                    $im_name = $model->quizz_title; 
+                    $name=str_replace(" ", "_", $im_name);
+                
+                    $model->quizz_file->SaveAs('uploads/' . $name . '.' . $model->quizz_file->extension);
+                    $model->quizz_file =$name . '.' . $model->quizz_file->extension;
+                    $model->save();
+                    return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new Quizz",
-                    'content'=>'<span class="text-success">Create Quizz success</span>',
+                    'title'=> "Create new AssignmentUpload",
+                    'content'=>'<span class="text-success">Create AssignmentUpload success</span>',
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
         
-                ];         
+                ]; 
+                }else{
+                    return [
+                    'forceReload'=>'#crud-datatable-pjax',
+                    'title'=> "Create new AssignmentUpload",
+                    'content'=>print_r($model->getErrors()),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                        ];
+                }         
             }else{           
                 return [
                     'title'=> "Create new Quizz",

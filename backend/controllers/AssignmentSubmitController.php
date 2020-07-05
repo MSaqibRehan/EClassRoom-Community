@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
+use common\models\Student;
 use common\models\AssignmentSubmit;
 use common\models\AssignmentSubmitSearch;
 use yii\web\Controller;
@@ -10,12 +11,65 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
+use yii\web\UploadedFile;
 
 /**
  * AssignmentSubmitController implements the CRUD actions for AssignmentSubmit model.
  */
 class AssignmentSubmitController extends Controller
 {
+
+
+    protected function beforeRun()
+    {
+        $this->controller->enableCsrfValidation = false;
+        return parent::beforeRun();
+    }
+
+
+    public function actionAssignment(){
+        return $this->render('assignment');
+    }
+    public function actionDeleteas(){
+        return $this->renderAjax('deleteas');
+    }
+    public function actionSubmission(){
+        $request = Yii::$app->request;
+        $model = new AssignmentSubmit();  
+        $model->status="Submitted for Grading";
+        $u_id=\Yii::$app->user->identity->id;
+        $student_table=Student::find()->where(['user_id'=>$u_id])->one();
+        $model->std_id=$student_table->std_id;
+        date_default_timezone_set("Asia/Karachi");
+        $date =  date("Y-m-d H:i:s");
+        $model->submit_date=$date;
+            /*
+            *   Process for non-ajax request
+            */
+            if ($model->load($request->post()) && $model->attach_file = UploadedFile::GetInstance($model, 'attach_file') ) {
+
+                     
+                    
+                    $im_name = $model->file_name; 
+                    $name=str_replace(" ", "_", $im_name);
+                
+                    $model->attach_file->SaveAs('uploads/' . $name . '.' . $model->attach_file->extension);
+                    $model->attach_file =$name . '.' . $model->attach_file->extension;
+                    $model->save();
+
+                    return $this->redirect(['./submit-assignment']);
+               
+            } else {
+                return $this->render('submission', [
+                    'model' => $model,
+                ]);
+            }
+        
+
+    }
+    public function actionDownload(){
+        return $this->render('download');
+    }
     /**
      * @inheritdoc
      */
@@ -143,7 +197,7 @@ class AssignmentSubmitController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id,$action)
     {
         $request = Yii::$app->request;
         $model = $this->findModel($id);       

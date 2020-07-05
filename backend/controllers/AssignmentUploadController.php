@@ -11,13 +11,27 @@ use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
 use yii\web\UploadedFile;
+
+use common\models\User;
+use common\models\Inbox;
+use common\models\Student;
+use common\models\StdEnrollment;
+use common\models\Semester;
+use common\models\SemesterSubjects;
 use common\models\Teacher;
+use common\models\TeacherClassEnrollment;
+
+use common\models\AssignmentSubmit;
+use common\models\AssignmentRemarks;
 
 /**
  * AssignmentUploadController implements the CRUD actions for AssignmentUpload model.
  */
 class AssignmentUploadController extends Controller
 {
+ 
+
+    
     /**
      * @inheritdoc
      */
@@ -106,15 +120,16 @@ class AssignmentUploadController extends Controller
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
-            }else if($model->load($request->post()) ){
+            }else if($model->load($request->post()) && $model->assign_file = UploadedFile::GetInstance($model, 'assign_file') ){
 
                 if ($model->validate()) {
-                    $model->assign_file = UploadedFile::GetInstance($model, 'assign_file'); 
+                    
                     
                     $im_name = $model->assign_title; 
+                    $name=str_replace(" ", "_", $im_name);
                 
-                    $model->assign_file->SaveAs('uploads/' . $im_name . '.' . $model->assign_file->extension);
-                    $model->assign_file = 'uploads/' . $im_name . '.' . $model->assign_file->extension;
+                    $model->assign_file->SaveAs('uploads/' . $name . '.' . $model->assign_file->extension);
+                    $model->assign_file =$name . '.' . $model->assign_file->extension;
                     $model->save();
                     return [
                     'forceReload'=>'#crud-datatable-pjax',
@@ -171,7 +186,9 @@ class AssignmentUploadController extends Controller
     public function actionUpdate($id)
     {
         $request = Yii::$app->request;
-        $model = $this->findModel($id);       
+        $model = $this->findModel($id); 
+        $prev=AssignmentUpload::find()->where(['assign_id'=>$id])->one();
+        $model->assign_file=$prev->assign_file;
 
         if($request->isAjax){
             /*
@@ -187,18 +204,32 @@ class AssignmentUploadController extends Controller
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];         
-            }else if($model->load($request->post()) && $model->validate()){
-                $model->created_at = new \yii\db\Expression('NOW()');
-                $model->save();
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "AssignmentUpload #".$id,
-                    'content'=>$this->renderAjax('view', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
-                ];    
+            }else if($model->load($request->post()) && $model->assign_file = UploadedFile::GetInstance($model, 'assign_file')   ){
+
+                    $model->created_at = new \yii\db\Expression('NOW()');      
+
+                    $im_name = $model->assign_title; 
+                    $name=str_replace(" ", "_", $im_name);
+                    
+                    $model->assign_file->SaveAs('uploads/' . $im_name . '.' . $model->assign_file->extension);
+                    $model->assign_file =$name . '.' . $model->assign_file->extension;
+                    
+                    $model->save();
+
+                    return [
+                        'forceReload'=>'#crud-datatable-pjax',
+                        'title'=> "AssignmentUpload #".$id,
+                        'content'=>$this->renderAjax('view', [
+                            'model' => $model,
+                        ]),
+                        'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                    ]; 
+                
+
+
+               
+                   
             }else{
                  return [
                     'title'=> "Update AssignmentUpload #".$id,
