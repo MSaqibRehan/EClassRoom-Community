@@ -34,19 +34,19 @@ return [
         'attribute'=>'sem_sub_id',
         'value'=>'semSub.subject_title',
     ],
-    [ 
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'uploaded_by',
-        'value'=>'uploadedBy.teacher_name',
-    ],
+    // [ 
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'attribute'=>'uploaded_by',
+    //     'value'=>'uploadedBy.teacher_name',
+    // ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'quizz_no',
     // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'quizz_title',
-    // ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'quizz_title',
+    ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'quizz_file',
