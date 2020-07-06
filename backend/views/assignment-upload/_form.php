@@ -13,13 +13,13 @@ use yii\helpers\ArrayHelper;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="assignment-upload-form">
+<div class="assignment-upload-form"> 
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'c_p_id')->dropDownList(
                 ArrayHelper::map(CourseProgram::find()->all(),'cp_id','cp_name'),
-                ['prompt'=>'Select Session Duration ...',
+                ['prompt'=>'Select Course Program ...',
                     'onchange'=>'
                     $.post("./semsub?id="+$(this).val(), function( data ) {
                     $( "select#semsub" ).html( data );
