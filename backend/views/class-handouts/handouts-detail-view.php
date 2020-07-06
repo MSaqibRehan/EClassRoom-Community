@@ -34,8 +34,8 @@ if(isset($_GET['subject_id']) && isset($_GET['teacher_id'])){
 				</div>
 				<div class="callout callout-info">
 		        <label style="font-size: 20px; padding-right: 20px;"><b>Add New Handout:</b></label>
-		        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Add Handout
-              </button>
+		        <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-default"><b><i class="fa fa-plus" aria-hidden="true"></i> Add Handout
+              </b></button>
 		        </div>
 			</div>			
 		</div>
@@ -808,7 +808,7 @@ use yii\widgets\ActiveForm;
 
 					<div class="form-group">
 					  <label for="week">Select Week:</label>
-					  <select class="form-control" id="week" name="week">
+					  <select class="form-control" id="week" name="week" required>
 					    <option>Select Week No...</option>
 					    <option value="1">1</option>
 					    <option value="2">2</option>
@@ -828,9 +828,15 @@ use yii\widgets\ActiveForm;
 					    <option value="16">16</option>
 					  </select>
 					</div>
-                	<div class="form-group">
-	                	<label>Lecture No#:</label>
-						<input type="text" name="lecture" id="lecture" required class="form-control" placeholder="Enter lecture no here...">
+
+					<div class="form-group">
+					  <label for="lecture">Select Lecture No#:</label>
+					  <select class="form-control" id="lecture" name="lecture" required>
+					    <option>Select Lecture No...</option>
+					    <option value="1">1</option>
+					    <option value="2">2</option>
+					    <option value="3">3</option>
+					  </select>
 					</div>
 
 					<div class="form-group">
@@ -879,9 +885,17 @@ if (isset($_POST['modal_submit'])) {
 	$created_at =  date("Y-m-d H:i:s");
 
       $file_name = $_FILES['file']['name'];
-      $file_tmp  = $_FILES['file']['tmp_name'];
-      $path = "uploads/".$file_name;
-      move_uploaded_file($file_tmp,$path);
+      $tmp_name = $_FILES['file']['tmp_name'];
+      $ext = pathinfo($file_name, PATHINFO_EXTENSION);
+      $filefullname = $topic . ' week ' . $week . ' lecture ' . $lecture;
+      $name=str_replace(" ", "_", $filefullname);
+      $path = "uploads/".$name.' . '.$ext;
+      $fullpath=str_replace(" ", "", $path);
+
+      move_uploaded_file($tmp_name, $fullpath);
+
+      $dbpath = $name.' . '.$ext;
+      $DBpath=str_replace(" ", "", $dbpath);
 
 	 // starting of transaction handling
     $transaction = \Yii::$app->db->beginTransaction();
@@ -893,7 +907,7 @@ if (isset($_POST['modal_submit'])) {
               'sem_sub_id'        => $sem_sub_id,
               'week'              => $week,
               'lecture'           => $lecture,
-              'file'              => $file_name,
+              'file'              => $DBpath,
               'topic'             => $topic,
               'description'       => $description,
               'created_by'        => $created_by,
@@ -901,7 +915,7 @@ if (isset($_POST['modal_submit'])) {
       ])->execute();
         // transaction commit
         $transaction->commit();
-        \Yii::$app->session->setFlash('success', '<strong>Success!</strong> Class Handout has been added.');
+        \Yii::$app->getSession()->setFlash('success', '<strong>Success!</strong> Class Handout has been added.');
         \Yii::$app->response->redirect(['./handouts-detail-view','subject_id' => $sem_sub_id,'teacher_id' => $teacher_id]);
     } // closing of try block 
     catch (Exception $e) {

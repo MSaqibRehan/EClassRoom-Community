@@ -1,4 +1,7 @@
 <?php
+$user_id = Yii::$app->user->identity->id;
+$userData = Yii::$app->db->createCommand("SELECT user_type FROM user WHERE id = '$user_id'")->queryAll();
+$userType = $userData[0]['user_type'];
 
 /* @var $this yii\web\View */
 
@@ -18,44 +21,132 @@ $this->title = 'IUB E-Classroom & Community';
                   </h4>
               </div>
           </div>
-          <?php $announcementData = Yii::$app->db->createCommand("SELECT * FROM announcement WHERE status = 'Active'")->queryAll();
-          
+        
+          <?php 
+            if ($userType == 'teacher' || $userType == 'Teacher') {
+              $teacherData = Yii::$app->db->createCommand("SELECT * FROM teacher WHERE user_id = '$user_id'")->queryAll();
+              $teacher_id   = $teacherData[0]['teacher_id'];
+              $teacher_name = $teacherData[0]['teacher_name'];
+
+              $announcementData = Yii::$app->db->createCommand("SELECT * FROM announcement WHERE teacher_id = '$teacher_id' AND status = 'Active'")->queryAll();
               $countannouncementData = count($announcementData);
               for ($i = 0; $i < $countannouncementData; $i++) {
-                  $msg = $announcementData[$i]['announcement'];
-                  $created_at = $announcementData[$i]['created_at'];
-                  $teacher_id = $announcementData[$i]['teacher_id'];
+                  $course_p_id    = $announcementData[$i]['course_p_id'];
+                  $session_id     = $announcementData[$i]['session_id'];
+                  $semester_id    = $announcementData[$i]['semester_id'];
+                  $sem_sub_id     = $announcementData[$i]['sem_sub_id'];
+                  $msg            = $announcementData[$i]['announcement'];
+                  $created_at     = $announcementData[$i]['created_at'];
+
+                  $courseData = Yii::$app->db->createCommand("SELECT cp_name FROM course_program WHERE cp_id = '$course_p_id'")->queryAll();
+                  $cp_name = $courseData[0]['cp_name'];
+
+                  $sessionData = Yii::$app->db->createCommand("SELECT session_duration FROM session WHERE session_id = '$session_id'")->queryAll();
+                  $session_duration = $sessionData[0]['session_duration'];
+
+                  $semesterData = Yii::$app->db->createCommand("SELECT semester_no FROM semester WHERE semester_id = '$semester_id'")->queryAll();
+                  $semester_no = $semesterData[0]['semester_no'];
+
+                  $subjectData = Yii::$app->db->createCommand("SELECT subject_title FROM semester_subjects WHERE sem_subj_id = '$sem_sub_id'")->queryAll();
+                  $subject_title = $subjectData[0]['subject_title'];
+
+           ?>
+
+          <div class="row">
+            <div class="col-md-12 col-sm-6 col-xs-12">
+              <div class="info-box bg-aqua callout-warning">
+                <span class="info-box-icon"><i class="fa fa-microphone"></i></span>
+                <div class="info-box-content">
+                  <h4 style="float: left;"><?=$cp_name;?> - <?=$semester_no;?> (<?=$session_duration;?>)</h4>
+                  <center><h4>Subject: <i><?=$subject_title;?></i></h4></center>
+                  <h4 style="float:right">
+                    <?php echo $created_at;?> 
+                  </h4>  
+                  <h4 style="float: left;">Announcement by Teacher: <i style="font-size: 22px;"><?=$teacher_name; ?></i> !</h4>  
+                  <h4 style="float:right">Announcement Date:&ensp;</h4>  
+                  <br><br>
+                  <div class="progress">
+                    <div class="progress-bar" style="width: 100%"></div>
+                  </div>
+                    <span class="progress-description" style="font-size: 22px;">
+                        <marquee onmouseover="this.stop();" onmouseout="this.start();">
+                          <?php                         
+                            echo $msg;
+                          ?>
+                        </marquee>
+                    </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+    <?php }
+    } ?>
+          <?php 
+          if ($userType == 'student' || $userType == 'Student') {
+              $stdData = Yii::$app->db->createCommand("SELECT * FROM student WHERE user_id = '$user_id'")->queryAll();
+              $std_id = $stdData[0]['std_id'];
+
+              $stdEnroll = Yii::$app->db->createCommand("SELECT * FROM std_enrollment WHERE std_id = '$std_id'")->queryAll();
+              $semester_id = $stdEnroll[0]['semester_id'];
+
+              $announcementData = Yii::$app->db->createCommand("SELECT * FROM announcement WHERE semester_id = '$semester_id' AND status = 'Active'")->queryAll();          
+              $countannouncementData = count($announcementData);
+
+              for ($i = 0; $i < $countannouncementData; $i++) {
+                 $course_p_id   = $announcementData[$i]['course_p_id'];
+                  $session_id   = $announcementData[$i]['session_id'];
+                  $semester_id  = $announcementData[$i]['semester_id'];
+                  $sem_sub_id   = $announcementData[$i]['sem_sub_id'];
+                  $msg          = $announcementData[$i]['announcement'];
+                  $created_at   = $announcementData[$i]['created_at'];
+                  $teacher_id   = $announcementData[$i]['teacher_id'];
+
+                  $courseData = Yii::$app->db->createCommand("SELECT cp_name FROM course_program WHERE cp_id = '$course_p_id'")->queryAll();
+                  $cp_name = $courseData[0]['cp_name'];
+
+                  $sessionData = Yii::$app->db->createCommand("SELECT session_duration FROM session WHERE session_id = '$session_id'")->queryAll();
+                  $session_duration = $sessionData[0]['session_duration'];
+
+                  $semesterData = Yii::$app->db->createCommand("SELECT semester_no FROM semester WHERE semester_id = '$semester_id'")->queryAll();
+                  $semester_no = $semesterData[0]['semester_no'];
+
+                  $subjectData = Yii::$app->db->createCommand("SELECT subject_title FROM semester_subjects WHERE sem_subj_id = '$sem_sub_id'")->queryAll();
+                  $subject_title = $subjectData[0]['subject_title'];
+
                   $teacherName = Yii::$app->db->createCommand("SELECT teacher_name FROM teacher WHERE teacher_id = '$teacher_id'")->queryAll();
                   $teacher_name = $teacherName[0]['teacher_name'];
 
           ?>
-            <div class="row">
-        <div class="col-md-12 col-sm-6 col-xs-12">
-          <div class="info-box bg-aqua callout-warning">
-            <span class="info-box-icon"><i class="fa fa-microphone"></i></span>
-            <div class="info-box-content">
-              <h4 style="float: left;">Announcement by Teacher: <i style="font-size: 22px;"><?=$teacher_name; ?></i> !</h4>  
-              <h4 style="float:right">
-                <?php
-                echo $created_at;
-                ?> 
-              </h4>  
-              <br><br>
-              <div class="progress">
-                <div class="progress-bar" style="width: 100%"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-6 col-xs-12">
+              <div class="info-box bg-aqua callout-warning">
+                <span class="info-box-icon"><i class="fa fa-microphone"></i></span>
+                <div class="info-box-content">
+                  <h4 style="float: left;"><?=$cp_name;?> - <?=$semester_no;?> (<?=$session_duration;?>)</h4>
+                  <center><h4>Subject: <i><?=$subject_title;?></i></h4></center>
+                  <h4 style="float:right">
+                    <?php echo $created_at;?> 
+                  </h4>  
+                  <h4 style="float: left;">Announcement by Teacher: <i style="font-size: 22px;"><?=$teacher_name; ?></i> !</h4>  
+                  <h4 style="float:right">Announcement Date:&ensp;</h4>  
+                  <br><br>
+                  <div class="progress">
+                    <div class="progress-bar" style="width: 100%"></div>
+                  </div>
+                    <span class="progress-description" style="font-size: 22px;">
+                        <marquee onmouseover="this.stop();" onmouseout="this.start();">
+                          <?php                         
+                            echo $msg;
+                          ?>
+                        </marquee>
+                    </span>
+                </div>
               </div>
-                <span class="progress-description" style="font-size: 22px;">
-                    <marquee onmouseover="this.stop();" onmouseout="this.start();">
-                      <?php                         
-                        echo $msg;
-                      ?>
-                    </marquee>
-                </span>
             </div>
           </div>
-        </div>
-      </div>
-<?php } ?>
+  <?php } 
+  }?>
           </div>
         </div>
 <script>
