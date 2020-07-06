@@ -48,6 +48,27 @@ class SemesterController extends Controller
     }
 
 
+     public function actionSubjects($id){
+        $count = \common\models\SemesterSubjects::find()
+                        ->where(['semester_id'=>$id,])
+                        ->count();
+
+        $semsubs = \common\models\SemesterSubjects::find()
+                        ->where(['semester_id'=>$id])
+                        ->all();
+        
+        if($count > 0){
+            echo "<option>--- Choose Subject ---</option>";
+            foreach($semsubs as $subs){
+                echo "<option value='".$subs->sem_subj_id."'>".$subs->subject_title."</option>";
+            }
+        }else{
+            echo "<option>--- No Subject Found ---</option>";
+        }
+
+    }
+
+
     /**
      * Displays a single Semester model.
      * @param integer $id

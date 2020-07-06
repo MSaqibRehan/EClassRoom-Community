@@ -18,7 +18,7 @@ class AssignmentUploadSearch extends AssignmentUpload
     public function rules()
     {
         return [
-            [['assign_id', 'session_id', 'semester_id', 'sem_sub_id', 'uploaded_by', 'assign_no'], 'integer'],
+            [['assign_id', 'session_id', 'semester_id', 'sem_sub_id', 'uploaded_by', 'assign_no','c_p_id'], 'integer'],
             [['assign_title', 'assign_file', 'assign_note', 'due_date', 'total_marks', 'status', 'created_at'], 'safe'],
         ];
     }

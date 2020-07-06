@@ -17,6 +17,7 @@ return array(
     'setasign\\Fpdi\\' => array($vendorDir . '/setasign/fpdi/src'),
     'rmrevin\\yii\\fontawesome\\' => array($vendorDir . '/rmrevin/yii2-fontawesome'),
     'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/type-resolver/src'),
+    'kato\\' => array($vendorDir . '/perminder-klair/yii2-dropzone'),
     'kartik\\popover\\' => array($vendorDir . '/kartik-v/yii2-popover-x/src'),
     'kartik\\plugins\\popover\\' => array($vendorDir . '/kartik-v/bootstrap-popover-x'),
     'kartik\\mpdf\\' => array($vendorDir . '/kartik-v/yii2-mpdf/src'),

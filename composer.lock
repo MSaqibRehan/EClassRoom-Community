@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d340e8c0fc9c9e699f47ead491749ac4",
+    "content-hash": "2c0b4ba06c3b4ad03a91c231e5c77855",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -54,7 +54,7 @@
             "version": "v3.4.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/twbs/bootstrap.git",
+                "url": "git@github.com:twbs/bootstrap.git",
                 "reference": "68b0d231a13201eb14acd3dc84e51543d16e5f7e"
             },
             "dist": {
@@ -75,7 +75,7 @@
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "https://github.com/RobinHerbots/Inputmask.git",
+                "url": "git@github.com:RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -1293,6 +1293,48 @@
                 "random"
             ],
             "time": "2018-07-02T15:55:56+00:00"
+        },
+        {
+            "name": "perminder-klair/yii2-dropzone",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/perminder-klair/yii2-dropzone.git",
+                "reference": "41e8145d940cc9955011138a9f16ad80e9831423"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/perminder-klair/yii2-dropzone/zipball/41e8145d940cc9955011138a9f16ad80e9831423",
+                "reference": "41e8145d940cc9955011138a9f16ad80e9831423",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "2.0.*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kato\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Parminder Klair",
+                    "email": "perminder.klair@gmail.com"
+                }
+            ],
+            "description": "DropzoneJs Extention for Yii2",
+            "keywords": [
+                "dropzone",
+                "extension",
+                "upload",
+                "yii2"
+            ],
+            "time": "2015-11-09T11:28:44+00:00"
         },
         {
             "name": "phpspec/php-diff",
@@ -5878,7 +5920,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "perminder-klair/yii2-dropzone": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

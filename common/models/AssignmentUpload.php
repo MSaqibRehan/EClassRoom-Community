@@ -10,7 +10,7 @@ use Yii;
  * @property int $assign_id
  * @property int $session_id
  * @property int $semester_id
- * @property int $sem_sub_id
+ * @property int $sem_sub_id 
  * @property int $uploaded_by
  * @property int $assign_no
  * @property string $assign_title
@@ -44,12 +44,12 @@ class AssignmentUpload extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['session_id', 'semester_id', 'sem_sub_id', 'uploaded_by', 'assign_no', 'assign_title', 'assign_file', 'due_date', 'total_marks', 'status', 'created_at'], 'required'],
+            [['session_id',  'semester_id', 'sem_sub_id', 'uploaded_by', 'assign_no', 'assign_title',  'due_date', 'total_marks', 'status', 'created_at','c_p_id'], 'required'],
             [['session_id', 'semester_id', 'sem_sub_id', 'uploaded_by', 'assign_no'], 'integer'],
             [['assign_note', 'status'], 'string'],
-            [['due_date', 'created_at'], 'safe'],
+            [[ 'created_at', 'assign_file'], 'safe'],
             [['assign_title'], 'string', 'max' => 200],
-            [['assign_file'], 'string', 'max' => 255],
+
             [['total_marks'], 'string', 'max' => 20],
             [['session_id'], 'exist', 'skipOnError' => true, 'targetClass' => Session::className(), 'targetAttribute' => ['session_id' => 'session_id']],
             [['semester_id'], 'exist', 'skipOnError' => true, 'targetClass' => Semester::className(), 'targetAttribute' => ['semester_id' => 'semester_id']],
@@ -69,6 +69,7 @@ class AssignmentUpload extends \yii\db\ActiveRecord
             'semester_id' => 'Semester No',
             'sem_sub_id' => 'Semester Subject',
             'uploaded_by' => 'Uploaded By',
+            'c_p_id'=>'Course Program',
             'assign_no' => 'Assignment No',
             'assign_title' => 'Assign Title',
             'assign_file' => 'Assign File',
@@ -139,4 +140,10 @@ class AssignmentUpload extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Teacher::className(), ['teacher_id' => 'uploaded_by']);
     }
+    public function getCp()
+    {
+        return $this->hasOne(Teacher::className(), ['c_p_id' => 'cp_id']);
+    }
+
+    
 }

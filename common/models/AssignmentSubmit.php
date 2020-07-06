@@ -20,6 +20,7 @@ use Yii;
  */
 class AssignmentSubmit extends \yii\db\ActiveRecord
 {
+    public $file_name;
     /**
      * {@inheritdoc}
      */
@@ -31,14 +32,13 @@ class AssignmentSubmit extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function rules()
+    public function rules() 
     {
         return [
-            [['assign_id', 'std_id', 'attach_file', 'submit_date', 'status'], 'required'],
+            [['assign_id', 'std_id', 'submit_date', 'status', 'attach_file','file_name'], 'required'],
             [['assign_id', 'std_id'], 'integer'],
             [['submit_date'], 'safe'],
             [['status'], 'string'],
-            [['attach_file'], 'string', 'max' => 255],
             [['assign_id'], 'exist', 'skipOnError' => true, 'targetClass' => AssignmentUpload::className(), 'targetAttribute' => ['assign_id' => 'assign_id']],
             [['std_id'], 'exist', 'skipOnError' => true, 'targetClass' => Student::className(), 'targetAttribute' => ['std_id' => 'std_id']],
         ];
@@ -53,6 +53,7 @@ class AssignmentSubmit extends \yii\db\ActiveRecord
             'assign_sub_id' => 'Assign Sub ID',
             'assign_id' => 'Assignment Title',
             'std_id' => 'Student',
+            'file_name' => 'File Save As',
             'attach_file' => 'Attach File',
             'submit_date' => 'Submit Date',
             'status' => 'Status',

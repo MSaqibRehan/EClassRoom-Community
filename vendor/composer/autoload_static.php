@@ -56,6 +56,7 @@ class ComposerStaticInitc90bec5495fcfbbbceec1952927b5df2
         ),
         'k' => 
         array (
+            'kato\\' => 5,
             'kartik\\popover\\' => 15,
             'kartik\\plugins\\popover\\' => 23,
             'kartik\\mpdf\\' => 12,
@@ -193,6 +194,10 @@ class ComposerStaticInitc90bec5495fcfbbbceec1952927b5df2
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+        ),
+        'kato\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/perminder-klair/yii2-dropzone',
         ),
         'kartik\\popover\\' => 
         array (
