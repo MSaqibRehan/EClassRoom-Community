@@ -140,5 +140,13 @@ class Session extends \yii\db\ActiveRecord
        return $this->hasOne(CourseProgram::className(), ['cp_id' => 'course_p_id']); 
    }
    
-
+    /** 
+    * Gets query for [[ClassHandouts]]. 
+    * 
+    * @return \yii\db\ActiveQuery 
+    */ 
+   public function getClassHandouts() 
+   { 
+       return $this->hasMany(ClassHandouts::className(), ['session_id' => 'session_id']); 
+   } 
 }

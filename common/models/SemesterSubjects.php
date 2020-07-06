@@ -132,4 +132,15 @@ class SemesterSubjects extends \yii\db\ActiveRecord
     {
         return $this->hasMany(TeacherClassEnrollment::className(), ['sem_sub_id' => 'sem_subj_id']);
     }
+
+     /** 
+    * Gets query for [[ClassHandouts]]. 
+    * 
+    * @return \yii\db\ActiveQuery 
+    */ 
+   public function getClassHandouts() 
+   { 
+       return $this->hasMany(ClassHandouts::className(), ['sem_sub_id' => 'sem_subj_id']); 
+   }
+
 }

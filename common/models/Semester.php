@@ -146,4 +146,16 @@ class Semester extends \yii\db\ActiveRecord
     {
         return $this->hasMany(TeacherClassEnrollment::className(), ['semester_id' => 'semester_id']);
     }
+
+    
+   /** 
+    * Gets query for [[ClassHandouts]]. 
+    * 
+    * @return \yii\db\ActiveQuery 
+    */ 
+   public function getClassHandouts() 
+   { 
+       return $this->hasMany(ClassHandouts::className(), ['semester_id' => 'semester_id']); 
+   }
+
 }

@@ -112,4 +112,24 @@ class CourseProgram extends \yii\db\ActiveRecord
     {
         return $this->hasMany(SemesterSubjects::className(), ['course_p_id' => 'cp_id']);
     }
+
+    /** 
+    * Gets query for [[ClassHandouts]]. 
+    * 
+    * @return \yii\db\ActiveQuery 
+    */ 
+   public function getClassHandouts() 
+   { 
+       return $this->hasMany(ClassHandouts::className(), ['course_p_id' => 'cp_id']); 
+   }
+
+   /** 
+    * Gets query for [[Sessions]]. 
+    * 
+    * @return \yii\db\ActiveQuery 
+    */ 
+   public function getSessions() 
+   { 
+       return $this->hasMany(Session::className(), ['course_p_id' => 'cp_id']); 
+   } 
 }

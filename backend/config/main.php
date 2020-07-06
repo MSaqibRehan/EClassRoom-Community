@@ -80,8 +80,15 @@ return [
                 'semester-subject' =>'semester-subjects/index',
                 'semsub'        => 'semester-subjects/semsub',
 
+                // inbox
                 'inbox'     => 'inbox/index',
                 'send-message'=> 'inbox/send',
+
+                // class handouts
+                'class-handouts-view'     => 'class-handouts/index',
+                'create'     => 'class-handouts/create',
+                'handouts-detail-view' => 'class-handouts/handouts-detail-view',
+                'handouts-std-view' => 'class-handouts/handouts-std-view',
             ],
         ],
         
