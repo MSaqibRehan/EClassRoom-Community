@@ -101,9 +101,8 @@ return [
                 'delete-assignment' => 'assignment-submit/deleteas',
 
 
-                'mark-quiz'  => 'assignment-upload/view',
-                'markq'  =>  'assignment-upload/mark',
-                'delete-quiz' => 'assignment-submit/deleteas',
+
+
 
                 'mark-quiz' =>'quizz-remarks/create',
                 'mark-quiz-update' =>'quizz-remarks/update',
