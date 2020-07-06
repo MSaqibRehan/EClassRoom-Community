@@ -39,15 +39,6 @@ if(isset($_GET['subject_id']) && isset($_GET['teacher_id'])){
 		        </div>
 			</div>			
 		</div>
-		<?php 
-			function msg() {
-			  echo "<div class='alert alert-success alert-dismissible fade in'>
-				     <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-				     <strong>Success!</strong> Class Handout has been added.
-				    </div>";
-			}
-		 ?>
-
 		<div class="row">
 			<div class="col-md-12">
 				<div class="box box-primary">
