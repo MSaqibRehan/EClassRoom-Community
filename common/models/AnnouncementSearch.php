@@ -41,7 +41,9 @@ class AnnouncementSearch extends Announcement
      */
     public function search($params)
     {
-        $query = Announcement::find();
+        $u_id=yii::$app->user->identity->id;
+        $teacher = Teacher::find()->where(['user_id'=>$u_id])->one();
+        $query = Announcement::find()->where(['teacher_id'=>$teacher->teacher_id]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -55,7 +57,7 @@ class AnnouncementSearch extends Announcement
             return $dataProvider;
         }
 
-        $query->joinWith('teacher');
+
         $query->joinWith('semester');
         $query->joinWith('session');
         $query->joinWith('semSub');
@@ -67,13 +69,13 @@ class AnnouncementSearch extends Announcement
             // 'session_id' => $this->session_id,
             // 'semester_id' => $this->semester_id,
             // 'sem_sub_id' => $this->sem_sub_id,
-            // 'teacher_id' => $this->teacher_id,
+             'teacher_id' => $this->teacher_id,
             'created_at' => $this->created_at,
         ]);
 
         $query->andFilterWhere(['like', 'announcement', $this->announcement])
             ->andFilterWhere(['like', 'courseP.cp_name', $this->course_p_id])
-            ->andFilterWhere(['like', 'teacher.teacher_name', $this->teacher_id])
+            // ->andFilterWhere(['like', 'teacher.teacher_name', $this->teacher_id])
             ->andFilterWhere(['like', 'semester.semester_no', $this->semester_id])
             ->andFilterWhere(['like', 'session.session_duration', $this->session_id])
             ->andFilterWhere(['like', 'semSub.subject_title', $this->sem_sub_id])

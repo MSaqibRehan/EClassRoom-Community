@@ -45,8 +45,8 @@ class Quizz extends \yii\db\ActiveRecord
     {
         return [
             [['course_p_id', 'session_id', 'semester_id', 'sem_sub_id', 'uploaded_by', 'quizz_no', 'quizz_title', 'total_marks', 'status', 'created_at'], 'required'],
-            [['course_p_id', 'session_id', 'semester_id', 'sem_sub_id', 'uploaded_by', 'quizz_no'], 'integer'],
-            [['quizz_note', 'status'], 'string'],
+            [['course_p_id', 'session_id', 'semester_id', 'uploaded_by', 'quizz_no'], 'integer'],
+            [['quizz_note', 'status' , 'sem_sub_id'], 'string'],
             [['created_at', 'quizz_file'], 'safe'],
             [['quizz_title', 'quizz_file'], 'string', 'max' => 255],
             [['total_marks'], 'string', 'max' => 20],
@@ -64,11 +64,11 @@ class Quizz extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'quizz_id' => 'Quizz ID',
-            'course_p_id' => 'Course P ID',
-            'session_id' => 'Session ID',
-            'semester_id' => 'Semester ID',
-            'sem_sub_id' => 'Sem Sub ID',
+            'quizz_id' => 'Quizz',
+            'course_p_id' => 'Course Program',
+            'session_id' => 'Session ',
+            'semester_id' => 'Semester ',
+            'sem_sub_id' => 'Subject ',
             'uploaded_by' => 'Uploaded By',
             'quizz_no' => 'Quizz No',
             'quizz_title' => 'Quizz Title',

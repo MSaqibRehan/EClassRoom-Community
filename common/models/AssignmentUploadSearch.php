@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\AssignmentUpload;
+use common\models\Teacher;
 
 /**
  * AssignmentUploadSearch represents the model behind the search form about `common\models\AssignmentUpload`.
@@ -41,7 +42,9 @@ class AssignmentUploadSearch extends AssignmentUpload
      */
     public function search($params)
     {
-        $query = AssignmentUpload::find();
+        $u_id=yii::$app->user->identity->id;
+        $teacher = Teacher::find()->where(['user_id'=>$u_id])->one();
+        $query = AssignmentUpload::find()->where(['uploaded_by'=>$teacher->teacher_id]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
