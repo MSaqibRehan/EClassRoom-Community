@@ -47,11 +47,6 @@ use yii\helpers\ArrayHelper;
                 ['prompt'=>'Select Semester Subject ...','id'=>'subjects']
     )?>
 
-    <?= $form->field($model, 'teacher_id')->dropDownList(
-                ArrayHelper::map(Teacher::find()->all(),'teacher_id','teacher_name'),
-                ['prompt'=>'Select Teacher ...',]
-    )?>
-
     <?= $form->field($model, 'announcement')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'status')->dropDownList([ 'Active' => 'Active', 'Inactive' => 'Inactive', ], ['prompt' => 'Select Status ....']) ?>

@@ -83,6 +83,11 @@ class AnnouncementController extends Controller
     {
         $request = Yii::$app->request;
         $model = new Announcement();  
+        $user_id = Yii::$app->user->identity->id;
+        $teacherData = Yii::$app->db->createCommand("SELECT * FROM teacher WHERE user_id = '$user_id'")->queryAll();
+        $teacher_id = $teacherData[0]['teacher_id'];
+        date_default_timezone_set("Asia/Karachi");
+                $date =  date("Y-m-d H:i:s");
 
         if($request->isAjax){
             /*
@@ -99,8 +104,9 @@ class AnnouncementController extends Controller
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
-            }else if($model->load($request->post()) && $model->validate()){
-                $model->created_at = new \yii\db\Expression('NOW()');
+            }else if($model->load($request->post())){
+                $model->teacher_id = $teacher_id;                
+                $model->created_at = $date;
                 $model->save();
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
@@ -146,7 +152,9 @@ class AnnouncementController extends Controller
     public function actionUpdate($id)
     {
         $request = Yii::$app->request;
-        $model = $this->findModel($id);       
+        $model = $this->findModel($id);
+        date_default_timezone_set("Asia/Karachi");
+                $date =  date("Y-m-d H:i:s");       
 
         if($request->isAjax){
             /*
@@ -162,8 +170,8 @@ class AnnouncementController extends Controller
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];         
-            }else if($model->load($request->post()) && $model->validate()){
-                $model->created_at = new \yii\db\Expression('NOW()');
+            }else if($model->load($request->post())){
+                $model->created_at = $date;;
                 $model->save();
                 return [
                     'forceReload'=>'#crud-datatable-pjax',

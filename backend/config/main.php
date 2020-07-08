@@ -89,6 +89,8 @@ return [
                 'create'     => 'class-handouts/create',
                 'handouts-detail-view' => 'class-handouts/handouts-detail-view',
                 'handouts-std-view' => 'class-handouts/handouts-std-view',
+                'handout-update' => 'class-handouts/handout-update',
+                'handout-delete' => 'class-handouts/handout-delete',
 
                 'subjects' => 'semester/subjects',
                 

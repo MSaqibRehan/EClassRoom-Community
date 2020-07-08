@@ -98,7 +98,7 @@
                 'items' => [
                     // ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
                     ['label' => 'Dashboard', 'icon' => 'dashboard', 'url' => ['/home']],
-                    //['label' => 'Student', 'icon' => 'address-card-o', 'url' => ['/student']],                   
+                    ['label' => 'Student', 'icon' => 'address-card-o', 'url' => ['/student']],                   
                     // ['label' => 'Student Enrollment', 'icon' => 'file-text-o', 'url' => ['/std-enrollment']],
                     //['label' => 'Teacher', 'icon' => 'user', 'url' => ['/teacher']],
                     // ['label' => 'Teacher Class Enrollment', 'icon' => 'file-text', 'url' => ['/teacher-class-enrollment']],
