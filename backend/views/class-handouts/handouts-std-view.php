@@ -51,7 +51,7 @@ if(isset($_GET['subject_id'])){
 					              		<tr>
 					              			<td><?=$week1Data[$i]['lecture'];?></td>
 					              			<td><?=$week1Data[$i]['topic'];?></td>
-					              			<td><?=$week1Data[$i]['file'];?></td>
+					              			<td><a href="download-file?file=<?php echo urlencode($week1Data[$i]['file']);  ?>" target="_blank" title="Handout" style="font-size: 20px;font-weight: bold;" > <?php echo $week1Data[$i]['file'];  ?> </a></td>
 					              			<td><?=$week1Data[$i]['description'];?></td>
 					              		</tr>
 					              		 <?php } ?>
@@ -96,7 +96,7 @@ if(isset($_GET['subject_id'])){
 					              		<tr>
 					              			<td><?=$week2Data[$i]['lecture'];?></td>
 					              			<td><?=$week2Data[$i]['topic'];?></td>
-					              			<td><?=$week2Data[$i]['file'];?></td>
+					              			<td><a href="download-file?file=<?php echo urlencode($week2Data[$i]['file']);  ?>" target="_blank" title="Handout" style="font-size: 20px;font-weight: bold;" > <?php echo $week2Data[$i]['file'];  ?> </a></td>
 					              			<td><?=$week2Data[$i]['description'];?></td>
 					              		</tr>
 					              		 <?php } ?>
@@ -142,7 +142,7 @@ if(isset($_GET['subject_id'])){
 					              		<tr>
 					              			<td><?=$week3Data[$i]['lecture'];?></td>
 					              			<td><?=$week3Data[$i]['topic'];?></td>
-					              			<td><?=$week3Data[$i]['file'];?></td>
+					              			<td><a href="download-file?file=<?php echo urlencode($week3Data[$i]['file']);  ?>" target="_blank" title="Handout" style="font-size: 20px;font-weight: bold;" > <?php echo $week3Data[$i]['file'];  ?> </a></td>
 					              			<td><?=$week3Data[$i]['description'];?></td>
 					              		</tr>
 					              		 <?php } ?>
@@ -187,7 +187,7 @@ if(isset($_GET['subject_id'])){
 					              		<tr>
 					              			<td><?=$week4Data[$i]['lecture'];?></td>
 					              			<td><?=$week4Data[$i]['topic'];?></td>
-					              			<td><?=$week4Data[$i]['file'];?></td>
+					              			<td><a href="download-file?file=<?php echo urlencode($week4Data[$i]['file']);  ?>" target="_blank" title="Handout" style="font-size: 20px;font-weight: bold;" > <?php echo $week4Data[$i]['file'];  ?> </a></td>
 					              			<td><?=$week4Data[$i]['description'];?></td>
 					              		</tr>
 					              		 <?php } ?>
@@ -232,7 +232,7 @@ if(isset($_GET['subject_id'])){
 					              		<tr>
 					              			<td><?=$week5Data[$i]['lecture'];?></td>
 					              			<td><?=$week5Data[$i]['topic'];?></td>
-					              			<td><?=$week5Data[$i]['file'];?></td>
+					              			<td><a href="download-file?file=<?php echo urlencode($week5Data[$i]['file']);  ?>" target="_blank" title="Handout" style="font-size: 20px;font-weight: bold;" > <?php echo $week5Data[$i]['file'];  ?> </a></td>
 					              			<td><?=$week5Data[$i]['description'];?></td>
 					              		</tr>
 					              		 <?php } ?>
@@ -277,7 +277,7 @@ if(isset($_GET['subject_id'])){
 					              		<tr>
 					              			<td><?=$week6Data[$i]['lecture'];?></td>
 					              			<td><?=$week6Data[$i]['topic'];?></td>
-					              			<td><?=$week6Data[$i]['file'];?></td>
+					              			<td><a href="download-file?file=<?php echo urlencode($week6Data[$i]['file']);  ?>" target="_blank" title="Handout" style="font-size: 20px;font-weight: bold;" > <?php echo $week6Data[$i]['file'];  ?> </a></td>
 					              			<td><?=$week6Data[$i]['description'];?></td>
 					              		</tr>
 					              		 <?php } ?>
@@ -322,7 +322,7 @@ if(isset($_GET['subject_id'])){
 					              		<tr>
 					              			<td><?=$week7Data[$i]['lecture'];?></td>
 					              			<td><?=$week7Data[$i]['topic'];?></td>
-					              			<td><?=$week7Data[$i]['file'];?></td>
+					              			<td><a href="download-file?file=<?php echo urlencode($week7Data[$i]['file']);  ?>" target="_blank" title="Handout" style="font-size: 20px;font-weight: bold;" > <?php echo $week7Data[$i]['file'];  ?> </a></td>
 					              			<td><?=$week7Data[$i]['description'];?></td>
 					              		</tr>
 					              		 <?php } ?>
@@ -367,7 +367,7 @@ if(isset($_GET['subject_id'])){
 					              		<tr>
 					              			<td><?=$week8Data[$i]['lecture'];?></td>
 					              			<td><?=$week8Data[$i]['topic'];?></td>
-					              			<td><?=$week8Data[$i]['file'];?></td>
+					              			<td><a href="download-file?file=<?php echo urlencode($week8Data[$i]['file']);  ?>" target="_blank" title="Handout" style="font-size: 20px;font-weight: bold;" > <?php echo $week8Data[$i]['file'];  ?> </a></td>
 					              			<td><?=$week8Data[$i]['description'];?></td>
 					              		</tr>
 					              		 <?php } ?>
@@ -412,7 +412,7 @@ if(isset($_GET['subject_id'])){
 					              		<tr>
 					              			<td><?=$week9Data[$i]['lecture'];?></td>
 					              			<td><?=$week9Data[$i]['topic'];?></td>
-					              			<td><?=$week9Data[$i]['file'];?></td>
+					              			<td><a href="download-file?file=<?php echo urlencode($week9Data[$i]['file']);  ?>" target="_blank" title="Handout" style="font-size: 20px;font-weight: bold;" > <?php echo $week9Data[$i]['file'];  ?> </a></td>
 					              			<td><?=$week9Data[$i]['description'];?></td>
 					              		</tr>
 					              		 <?php } ?>
@@ -457,7 +457,7 @@ if(isset($_GET['subject_id'])){
 					              		<tr>
 					              			<td><?=$week10Data[$i]['lecture'];?></td>
 					              			<td><?=$week10Data[$i]['topic'];?></td>
-					              			<td><?=$week10Data[$i]['file'];?></td>
+					              			<td><a href="download-file?file=<?php echo urlencode($week10Data[$i]['file']);  ?>" target="_blank" title="Handout" style="font-size: 20px;font-weight: bold;" > <?php echo $week10Data[$i]['file'];  ?> </a></td>
 					              			<td><?=$week10Data[$i]['description'];?></td>
 					              		</tr>
 					              		 <?php } ?>
@@ -502,7 +502,7 @@ if(isset($_GET['subject_id'])){
 					              		<tr>
 					              			<td><?=$week11Data[$i]['lecture'];?></td>
 					              			<td><?=$week11Data[$i]['topic'];?></td>
-					              			<td><?=$week11Data[$i]['file'];?></td>
+					              			<td><a href="download-file?file=<?php echo urlencode($week11Data[$i]['file']);  ?>" target="_blank" title="Handout" style="font-size: 20px;font-weight: bold;" > <?php echo $week11Data[$i]['file'];  ?> </a></td>
 					              			<td><?=$week11Data[$i]['description'];?></td>
 					              		</tr>
 					              		 <?php } ?>
@@ -547,7 +547,7 @@ if(isset($_GET['subject_id'])){
 					              		<tr>
 					              			<td><?=$week12Data[$i]['lecture'];?></td>
 					              			<td><?=$week12Data[$i]['topic'];?></td>
-					              			<td><?=$week12Data[$i]['file'];?></td>
+					              			<td><a href="download-file?file=<?php echo urlencode($week12Data[$i]['file']);  ?>" target="_blank" title="Handout" style="font-size: 20px;font-weight: bold;" > <?php echo $week12Data[$i]['file'];  ?> </a></td>
 					              			<td><?=$week12Data[$i]['description'];?></td>
 					              		</tr>
 					              		 <?php } ?>
@@ -592,7 +592,7 @@ if(isset($_GET['subject_id'])){
 					              		<tr>
 					              			<td><?=$week13Data[$i]['lecture'];?></td>
 					              			<td><?=$week13Data[$i]['topic'];?></td>
-					              			<td><?=$week13Data[$i]['file'];?></td>
+					              			<td><a href="download-file?file=<?php echo urlencode($week13Data[$i]['file']);  ?>" target="_blank" title="Handout" style="font-size: 20px;font-weight: bold;" > <?php echo $week13Data[$i]['file'];  ?> </a></td>
 					              			<td><?=$week13Data[$i]['description'];?></td>
 					              		</tr>
 					              		 <?php } ?>
@@ -637,7 +637,7 @@ if(isset($_GET['subject_id'])){
 					              		<tr>
 					              			<td><?=$week14Data[$i]['lecture'];?></td>
 					              			<td><?=$week14Data[$i]['topic'];?></td>
-					              			<td><?=$week14Data[$i]['file'];?></td>
+					              			<td><a href="download-file?file=<?php echo urlencode($week14Data[$i]['file']);  ?>" target="_blank" title="Handout" style="font-size: 20px;font-weight: bold;" > <?php echo $week14Data[$i]['file'];  ?> </a></td>
 					              			<td><?=$week14Data[$i]['description'];?></td>
 					              		</tr>
 					              		 <?php } ?>
@@ -682,7 +682,7 @@ if(isset($_GET['subject_id'])){
 					              		<tr>
 					              			<td><?=$week15Data[$i]['lecture'];?></td>
 					              			<td><?=$week15Data[$i]['topic'];?></td>
-					              			<td><?=$week15Data[$i]['file'];?></td>
+					              			<td><a href="download-file?file=<?php echo urlencode($week15Data[$i]['file']);  ?>" target="_blank" title="Handout" style="font-size: 20px;font-weight: bold;" > <?php echo $week15Data[$i]['file'];  ?> </a></td>
 					              			<td><?=$week15Data[$i]['description'];?></td>
 					              		</tr>
 					              		 <?php } ?>
@@ -727,7 +727,7 @@ if(isset($_GET['subject_id'])){
 					              		<tr>
 					              			<td><?=$week16Data[$i]['lecture'];?></td>
 					              			<td><?=$week16Data[$i]['topic'];?></td>
-					              			<td><?=$week16Data[$i]['file'];?></td>
+					              			<td><a href="download-file?file=<?php echo urlencode($week16Data[$i]['file']);  ?>" target="_blank" title="Handout" style="font-size: 20px;font-weight: bold;" > <?php echo $week16Data[$i]['file'];  ?> </a></td>
 					              			<td><?=$week16Data[$i]['description'];?></td>
 					              		</tr>
 					              		 <?php } ?>
