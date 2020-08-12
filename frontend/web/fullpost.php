@@ -63,7 +63,7 @@
       $record = mysqli_query($conn , $query);
       $comment_count = mysqli_num_rows($record);
       if ($comment_count == 0 ) {
-        echo "<p class=' text-info text-center'>No comments on this post</p>";
+        echo "<p class=' text-info text-center'>No Answers on this post</p>";
       }else{
           while ($record_set = mysqli_fetch_assoc($record)) {
           ?>
@@ -97,7 +97,7 @@
         </div>
 
           <div class="form-group my-3">
-            <input type="submit" value="Submit Comment" name="submit_comment" class=" form-control btn btn-success text-white" >
+            <input type="submit" value="Submit Answer" name="submit_comment" class=" form-control btn btn-success text-white" >
 
           </div>
 
@@ -130,28 +130,28 @@
         <form action="" method="POST" >
           <div class="form-group">
             <label class="form-control-label">Your Name</label> 
-            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Your Name"> 
+            <input type="text" class="form-control" id="name1" name="name" placeholder="Enter Your Name"> 
             
           </div>
       <span class="errname"></span>
           <div class="form-group">
             <label class="form-control-label">Your Email</label> 
-            <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email Address"> 
+            <input type="email" class="form-control" id="email1" name="email" placeholder="Enter Your Email Address"> 
             <span class="erremail"></span>
           </div>
           <div class="form-group">
             <label class="form-control-label">Your Question</label> 
-            <input type="text" class="form-control" id="question" name="question"> 
+            <input type="text" class="form-control" id="question1" name="question"> 
             <span class="errquestion"></span>
           </div>
           <div class="form-group">
             <label class="form-control-label">Category</label> 
-            <input type="text" class="form-control" id="category" name="category"> 
+            <input type="text" class="form-control" id="category1" name="category"> 
             <span class="errcategory"></span>
           </div>
           <div class="form-group">
             <label class="form-control-label">Description</label> 
-            <textarea name="description" id="description" rows="4" class="form-control" placeholder="Please Describe Your Question"></textarea>
+            <textarea name="description" id="description1" rows="4" class="form-control" placeholder="Please Describe Your Question"></textarea>
             <span class="errdescription"></span>
           </div>
           <span class="message_box"></span>
@@ -244,7 +244,7 @@
         $_SESSION['message'] .= "<li>invalid Email Address</li>" ;
       }
       if (empty($comment) ){
-        $_SESSION['message'] .= "<li>Enter Comment Content</li>";
+        $_SESSION['message'] .= "<li>Enter Answer Content</li>";
       } 
 
 
@@ -259,8 +259,75 @@
       $_SESSION['message'] = "error:" . $query . "<br>". mysqli_error($conn);
     header("location:fullpost.php?post=". urlencode($post_id));
     }else {
-      $_SESSION['message'] = 'Comment Submit Success';
+      $_SESSION['message'] = 'Answer Submit Success';
     header("location:fullpost.php?post=". urlencode($post_id));    }}
   }
 ?>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+      $('#createforum').click(function(e){  
+    e.preventDefault();
+    var name = $('#name1').val();
+    var email = $('#email1').val();
+    var question = $('#question1').val();
+    var category = $('#category1').val();
+    var description = $('#description1').val();
+    if(name == ''){
+      $('.errname').html(
+      '<span style="color:red;">Enter name !</span>'
+      );
+      $('#name1').focus();
+      return false;
+      }else{
+          $('.errname').html("");
+        }
+    if(email == ''){
+      $('.erremail').html(
+      '<span style="color:red;">Enter email !</span>'
+      );
+      $('#email1').focus();
+      return false;
+    }else{
+          $('.erremail').html("");
+    }
+    if(question == ''){
+      $('.errquestion').html(
+      '<span style="color:red;">Enter question !</span>'
+      );
+      $('#question1').focus();
+      return false;
+    }else{
+          $('.errquestion').html("");
+    }
+    if(category == ''){
+      $('.errcategory').html(
+      '<span style="color:red;">Enter category !</span>'
+      );
+      $('#category1').focus();
+      return false;
+    }else{
+          $('.errcategory').html("");
+    }
+    if(description == ''){
+      $('.errdescription').html(
+      '<span style="color:red;">Enter description !</span>'
+      );
+      $('#description1').focus();
+      return false;
+    }else{
+          $('.errdescription').html("");
+    }
+          $.ajax({
+            url : "add-forum.php",
+            method:"POST",
+            data:{ name:name, email:email,question:question, category:category,description:description},           
+              success:function(data){
+                $('.message_box').html(data);
+                  }
+            });
+  });
+
+    </script>
+
 <?php include 'includes/layout/footer.php'; ?>

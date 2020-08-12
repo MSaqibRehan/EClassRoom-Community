@@ -234,7 +234,7 @@ echo  "<h2>Search Records For keyword : ".$query."</h2>";
       $author = $_SESSION['login_user'];
       $query = "UPDATE comment SET status ='1' , approved_by ='{$author}' WHERE id = {$approve_id}  ";
       if (mysqli_query($conn , $query)) {
-        $_SESSION['message'] = "Comment Approved";
+        $_SESSION['message'] = "Answer Approved";
         header("location:comments.php");
       }else{
         $_SESSION['message'] = $query . mysqli_error($conn);
@@ -243,7 +243,7 @@ echo  "<h2>Search Records For keyword : ".$query."</h2>";
     }elseif (isset($disapprove_id)) {
        $query = "UPDATE comment SET status ='{0}' , approved_by =null WHERE id = {$disapprove_id} ";
       if (mysqli_query($conn , $query)) {
-        $_SESSION['message'] = "Comment DisApproved";
+        $_SESSION['message'] = "Answer DisApproved";
         header("location:comments.php");
       }else{
         $_SESSION['message'] = $query .mysqli_error($conn);
@@ -252,7 +252,7 @@ echo  "<h2>Search Records For keyword : ".$query."</h2>";
     }elseif (isset($delete_id)) {
        $query = "DELETE FROM comment WHERE id = {$delete_id}";
       if (mysqli_query($conn , $query)) {
-        $_SESSION['message'] = "Comment Deleted";
+        $_SESSION['message'] = "Answer Deleted";
         header("location:comments.php");
       }else{
         $_SESSION['message'] =$query . mysqli_error($conn);

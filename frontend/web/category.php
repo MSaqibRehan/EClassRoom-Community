@@ -1,7 +1,7 @@
 <?php
   include 'includes/config.php';
   include 'includes/sessions.php';
-	include 'includes/layout/header.php';
+  include 'includes/layout/index_header.php';
 ?>
 <?php 
   if (isset($_GET['category'])) {
@@ -11,7 +11,7 @@
 <div class="row" style="min-height: 520px;">
   <div class="col-md-9 pl-5">
 <div class="row w-75  my-3 mx-auto ">
-    <p class="h3">MY PHP RESPONSIVE BLOG</p>
+    <p class="h3">Category: <?= $selected_category ?></p>
     <?php
       $record = mysqli_query($conn , "SELECT * FROM posts WHERE category = '{$selected_category}'");
       while ($record_set = mysqli_fetch_assoc($record)) {
@@ -160,5 +160,70 @@
   </div>
 
 </div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+      $('#createforum').click(function(e){  
+    e.preventDefault();
+    var name = $('#name').val();
+    var email = $('#email').val();
+    var question = $('#question').val();
+    var category = $('#category').val();
+    var description = $('#description').val();
+    if(name == ''){
+      $('.errname').html(
+      '<span style="color:red;">Enter name !</span>'
+      );
+      $('#name').focus();
+      return false;
+      }else{
+          $('.errname').html("");
+        }
+    if(email == ''){
+      $('.erremail').html(
+      '<span style="color:red;">Enter email !</span>'
+      );
+      $('#email').focus();
+      return false;
+    }else{
+          $('.erremail').html("");
+    }
+    if(question == ''){
+      $('.errquestion').html(
+      '<span style="color:red;">Enter question !</span>'
+      );
+      $('#question').focus();
+      return false;
+    }else{
+          $('.errquestion').html("");
+    }
+    if(category == ''){
+      $('.errcategory').html(
+      '<span style="color:red;">Enter category !</span>'
+      );
+      $('#category').focus();
+      return false;
+    }else{
+          $('.errcategory').html("");
+    }
+    if(description == ''){
+      $('.errdescription').html(
+      '<span style="color:red;">Enter description !</span>'
+      );
+      $('#description').focus();
+      return false;
+    }else{
+          $('.errdescription').html("");
+    }
+          $.ajax({
+            url : "add-forum.php",
+            method:"POST",
+            data:{ name:name, email:email,question:question, category:category,description:description},           
+              success:function(data){
+                $('.message_box').html(data);
+                  }
+            });
+  });
+
+    </script>
 
 <?php include 'includes/layout/footer.php'; ?>

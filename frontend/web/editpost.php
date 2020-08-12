@@ -47,10 +47,7 @@
       <a class="nav-link text-white" href="manageadmins.php"><i class="fa fa-user pr-2"></i>Manage Admins</a>
     </li>
      <li class="nav-item">
-      <a class="nav-link text-white" href="comments.php"><i class="fa fa-comment pr-2"></i>Comments</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link text-white" href="index.php"><i class="fa fa-eye pr-2"></i>Live Blog</a>
+      <a class="nav-link text-white" href="comments.php"><i class="fa fa-comment pr-2"></i>Answers</a>
     </li>
     <li class="nav-item">
       <a class="nav-link text-white" href="logout.php"><i class="fa fa-sign-out-alt pr-2"></i>logout</a>

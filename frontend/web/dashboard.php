@@ -92,7 +92,7 @@ echo   "<h2>Search Records For keyword : <span class='text-success'>".$query."</
           <th>Author</th>
           <th>Category</th>
           <th>Banner</th>
-          <th>Comments</th>
+          <th>Answers</th>
           <th>Action</th>
           <th>Details</th>
         </tr>

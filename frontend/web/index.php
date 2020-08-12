@@ -1,5 +1,3 @@
-
-
 <?php
 	include 'includes/config.php';
 	include 'includes/sessions.php';
@@ -48,8 +46,8 @@
 
     </style>
 </head>
-<body class=" m-0 p-0">
-<div class="container-fluid m-0 p-0" style="padding: 0px;">
+<body>
+<div class="container-fluid" >
         <div class="row my-0">
             <div class="col-12 p-0">
                     <nav class="navbar navbar-expand-lg bg-dark py-0 pr-3" style="border-top: 5px solid #36B0DD; border-bottom: 5px solid #36B0DD;">
@@ -89,7 +87,7 @@
 				$offset = ($pageno-1) * $no_of_records_per_page;
 
 	?>
-<div class="row" style="min-height: 520px;">
+<div class="row" style="min-height: 700px;">
 	<div class="col-md-9 pl-5">
 <div style="width: 85%;" class="row   my-3 mx-auto ">
 		<p class="h2 text-capitalize text-info">Check Out the Recent Forums</p>

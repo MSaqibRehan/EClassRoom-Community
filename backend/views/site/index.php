@@ -8,6 +8,7 @@ $userType = $userData[0]['user_type'];
 $this->title = 'IUB E-Classroom & Community';
 ?>
 
+
 <div class="box box-danger" style="border-top:3px solid #607D8B;">
         <div class="box-body">
           <div class="row" style="padding:10px;margin-bottom:10px;">
@@ -21,7 +22,7 @@ $this->title = 'IUB E-Classroom & Community';
                   </h4>
               </div>
           </div>
-        
+
           <?php 
             if ($userType == 'teacher' || $userType == 'Teacher') {
               $teacherData = Yii::$app->db->createCommand("SELECT * FROM teacher WHERE user_id = '$user_id'")->queryAll();

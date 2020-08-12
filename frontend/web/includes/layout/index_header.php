@@ -42,13 +42,13 @@
 
     </style>
 </head>
-<body class=" m-0 p-0">
-<div class="container-fluid m-0 p-0" style="padding: 0px;">
+<body >
+<div class="container-fluid" >
         <div class="row my-0">
             <div class="col-12 p-0">
                     <nav class="navbar navbar-expand-lg bg-dark py-0 pr-3" style="border-top: 5px solid #36B0DD; border-bottom: 5px solid #36B0DD;">
 
-                <a href="" class=" offset-1 navbar-brand js-scroll-trigger font-weight-bold p-1" style="color: #36B0DD; font-size: 25px; font-style: italic;"> eClassroom & Community</a>
+                <a href="index.php" class=" offset-1 navbar-brand js-scroll-trigger font-weight-bold p-1" style="color: #36B0DD; font-size: 25px; font-style: italic;"> eClassroom & Community</a>
                 <button class="navbar-toggler navbar-toggler-right text-uppercase bg-success text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fa fa-bars"></i>

@@ -44,7 +44,7 @@ AppAsset::register($this);
     if (empty($assignment_submit) || !$assignment_submit){
         $status="Not Submitted";
     }else{
-        $assign_rem=AssignmentRemarks::find()->where(['assign_id'=>$assign->assign_id])->andwhere(['assign_sub_id'=>$assignment_submit->assign_sub_id])->one();
+        $assign_rem=AssignmentRemarks::find()->where(['assign_id'=>$assignment_submit->assign_id])->andwhere(['assign_sub_id'=>$assignment_submit->assign_sub_id])->one();
         if (empty($assign_rem) || !$assign_rem){
             $status="Submitted for Grading";
         }else{

@@ -38,7 +38,7 @@ use yii\helpers\Html;
 
                             <p>
                                 <?php echo Yii::$app->user->identity->username; ?> - <?php echo Yii::$app->user->identity->user_type; ?>
-                                <small>Member since Nov. 2012</small>
+
                             </p>
                         </li>
                         <!-- Menu Body -->
