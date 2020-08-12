@@ -42,11 +42,13 @@ $this->title = 'IUB E-Classroom & Community';
                   $courseData = Yii::$app->db->createCommand("SELECT cp_name FROM course_program WHERE cp_id = '$course_p_id'")->queryAll();
                   $cp_name = $courseData[0]['cp_name'];
 
-                  $sessionData = Yii::$app->db->createCommand("SELECT session_duration FROM session WHERE session_id = '$session_id'")->queryAll();
+                  $sessionData = Yii::$app->db->createCommand("SELECT * FROM session WHERE session_id = '$session_id'")->queryAll();
                   $session_duration = $sessionData[0]['session_duration'];
+                  $intake = $sessionData[0]['intake'];
 
-                  $semesterData = Yii::$app->db->createCommand("SELECT semester_no FROM semester WHERE semester_id = '$semester_id'")->queryAll();
-                  $semester_no = $semesterData[0]['semester_no'];
+                  $semesterData = Yii::$app->db->createCommand("SELECT * FROM semester WHERE semester_id = '$semester_id'")->queryAll();
+                  $semester_no  = $semesterData[0]['semester_no'];
+                  $class_time   = $semesterData[0]['class_time'];
 
                   $subjectData = Yii::$app->db->createCommand("SELECT subject_title FROM semester_subjects WHERE sem_subj_id = '$sem_sub_id'")->queryAll();
                   $subject_title = $subjectData[0]['subject_title'];
@@ -58,7 +60,7 @@ $this->title = 'IUB E-Classroom & Community';
               <div class="info-box bg-aqua callout-warning">
                 <span class="info-box-icon"><i class="fa fa-microphone"></i></span>
                 <div class="info-box-content">
-                  <h4 style="float: left;"><?=$cp_name;?> - <?=$semester_no;?> (<?=$session_duration;?>)</h4>
+                  <h4 style="float: left;"><?=$cp_name;?> - <?=$semester_no;?> <i><?=$class_time;?></i> (<?=$intake;?> - <?=$session_duration;?>)</h4>
                   <center><h4>Subject: <i><?=$subject_title;?></i></h4></center>
                   <h4 style="float:right">
                     <?php echo $created_at;?> 
@@ -106,11 +108,13 @@ $this->title = 'IUB E-Classroom & Community';
                   $courseData = Yii::$app->db->createCommand("SELECT cp_name FROM course_program WHERE cp_id = '$course_p_id'")->queryAll();
                   $cp_name = $courseData[0]['cp_name'];
 
-                  $sessionData = Yii::$app->db->createCommand("SELECT session_duration FROM session WHERE session_id = '$session_id'")->queryAll();
+                  $sessionData = Yii::$app->db->createCommand("SELECT * FROM session WHERE session_id = '$session_id'")->queryAll();
                   $session_duration = $sessionData[0]['session_duration'];
+                  $intake = $sessionData[0]['intake'];
 
-                  $semesterData = Yii::$app->db->createCommand("SELECT semester_no FROM semester WHERE semester_id = '$semester_id'")->queryAll();
+                  $semesterData = Yii::$app->db->createCommand("SELECT * FROM semester WHERE semester_id = '$semester_id'")->queryAll();
                   $semester_no = $semesterData[0]['semester_no'];
+                  $class_time = $semesterData[0]['class_time'];
 
                   $subjectData = Yii::$app->db->createCommand("SELECT subject_title FROM semester_subjects WHERE sem_subj_id = '$sem_sub_id'")->queryAll();
                   $subject_title = $subjectData[0]['subject_title'];
@@ -124,7 +128,7 @@ $this->title = 'IUB E-Classroom & Community';
               <div class="info-box bg-aqua callout-warning">
                 <span class="info-box-icon"><i class="fa fa-microphone"></i></span>
                 <div class="info-box-content">
-                  <h4 style="float: left;"><?=$cp_name;?> - <?=$semester_no;?> (<?=$session_duration;?>)</h4>
+                  <h4 style="float: left;"><?=$cp_name;?> - <?=$semester_no;?> <i><?=$class_time;?></i> (<?=$intake;?> - <?=$session_duration;?>)</h4>
                   <center><h4>Subject: <i><?=$subject_title;?></i></h4></center>
                   <h4 style="float:right">
                     <?php echo $created_at;?> 

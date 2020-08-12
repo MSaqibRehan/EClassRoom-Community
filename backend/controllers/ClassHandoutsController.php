@@ -32,7 +32,7 @@ class ClassHandoutsController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index', 'create', 'view', 'update', 'delete', 'bulk-delete','handouts-detail-view','handouts-std-view'],
+                        'actions' => ['logout', 'index', 'create', 'view', 'update', 'delete', 'bulk-delete','handouts-detail-view','handouts-std-view','handout-update','handout-delete'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -62,6 +62,12 @@ class ClassHandoutsController extends Controller
     }
     public function actionHandoutsStdView(){
         return $this->render('handouts-std-view');
+    }
+    public function actionHandoutUpdate(){
+        return $this->render('handout-update');
+    }
+    public function actionHandoutDelete(){
+        return $this->render('handout-delete');
     }
 
 
