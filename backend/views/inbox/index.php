@@ -16,7 +16,7 @@ use common\models\TeacherClassEnrollment;
 /* @var $searchModel common\models\InboxSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Inbox';
+$this->title = 'Composite Box';
 $this->params['breadcrumbs'][] = $this->title;
 
 
